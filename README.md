@@ -1,6 +1,8 @@
-# Sig-Sys
+# ELEN 3801 Signals and Systems
 Exam Cheat Sheets
+
 Please obtain the author's permission before sharing this with others.
+
 Feel free to use this skeleton to customize your own cheat sheet.
 
 A few notes:
