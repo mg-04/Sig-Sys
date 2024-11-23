@@ -28,7 +28,9 @@
 \renewcommand{\c}{\mathrm{c}\,}
 \newcommand{\s}{\mathrm{s}\,}
 \renewcommand{\r}{\mathrm{r}\,}
+\newcommand{\ulint}{\int_{0^-}^{\infty}}    % unilateral LT integral
 \renewcommand{\o}{\omega}
+\newcommand{\ra}{\rightarrow}
 \newcommand{\lra}{\leftrightarrow}
 
 \usepackage{graphicx}
@@ -53,7 +55,7 @@
 
 \begin{document}
 \raggedright
-\begin{multicols}{3} % Use 3 columns
+%\begin{multicols}{3} % Use 3 columns
     $\arctan(\frac{1}{\sqrt{3}}) = \frac{\pi}{6}$,  $\arctan(\sqrt{3}) = \frac{\pi} 3$
 
     $\sin n\pi = 0$\\
@@ -66,7 +68,7 @@
     $\cos x \cos y = \sfrac{1}{2}[\cos(x-y) + \cos(x+y)]$\\
     $\sin x \cos y = \sfrac{1}{2}[\sin(x-y) + \sin(x+y)]$
 
-    $C \c(\omega_0 t + \theta) = C\,\c(\theta) \,\c(\omega_0 t) - C\s(\theta)\s(\o_0 t)$
+    $C \c(\o_0 t + \theta) = C\,\c(\theta) \,\c(\omega_0 t) - C\s(\theta)\s(\o_0 t)$
 
     $\theta = \tan^{-1} (-b/a)$, $\pm \pi$ when $a<0$\\
     $\sin t = \cos (t-\pi/2)$
@@ -97,7 +99,7 @@
     \(\int \frac{1} {x^2+a^2}\, dx = \frac{1}{a} \tan^{-1} \frac x a\)
     \rule{\linewidth}{0.5pt}
     $\mathcal{E}_f = \int_{-\infty}^{\infty} |f(t)|^2 dt$ (complex); \\
-    $P_f = \lim_{T\rightarrow\infty}\frac{1}{T} \int^{T/2}_{-T/2} |f(t)|^2 dt $; \\
+    $P_f = \lim_{T\ra\infty}\frac{1}{T} \int^{T/2}_{-T/2} |f(t)|^2 dt $; \\
     rms power $= \sqrt {P_f}$
 
     % can't be both energy/power
@@ -190,14 +192,13 @@
 \rule{\linewidth}{0.5pt}
     $\mathcal{E}_e = \int_{t_1}^{t_2} [e(t)]^2 dt = \int_{t_1}^{t_2} f^2(t)dt$\\
     $- 2\sum c_i \int_{t_1}^{t_2} f(t) x_i(t) dt + \int_{t_1}^{t_2} (\sum c_i x_i(t))^2 dt$\\
-    $    = \mathcal{E}_f
-    -  2\sum \langle f, x_i \rangle +
+    $    = \mathcal{E}_f -  2\sum_{c_i} \langle f, x_i \rangle +
     (\sum c_i^2 \int_{t_1}^{t_2} x_i(t)^2 dt + \sum_{i\neq j} c_i c_j \int_{t_1}^{t_2} x_i(t) x_j(t) dt)$
         
     $\frac{\partial \mathcal{E}_e}{\partial c_i} = 0 = -2 \langle f(t), x_i(t)\rangle + 2\mathcal{E}_i c_i$\\
     $\mathcal{E}_e^{\text{min}} = \mathcal{E}_f - \sum_{i=1}^N c_i^2 \mathcal{E}_i$
 
-    \(c_i = \frac{1}{\mathcal{E}_i}\langle f, x_i\rangle = \frac{\int f(t) x(t) dt}{\int f^2(t) dt}\)    
+    \(c_i = \frac{1}{\mathcal{E}_i}\langle f, x_i\rangle = \frac{\int f(t) x(t) dt}{\int x_i^2(t) dt}\)    
 
     For ortho, $E_z = E_x + E_y$
         
@@ -206,7 +207,7 @@
 
     $\langle x(t), y(t)\rangle = \int_{t_1}^{t_2} x(t) y(t)^* \, dt$\\
     \( = \int_{t_1}^{t_2} x(t) y(t) dt\) if real\\
-    Use prod $\rightarrow$ sum identities
+    Use prod $\ra$ sum identities
 \rule{\linewidth}{0.5pt}
 %\vfill\null
 %\columnbreak 
@@ -228,15 +229,15 @@
 \rule{\linewidth}{0.5pt}
     W: finite $\int$, fin $a$, $b$, fin power
 
-    S: fin m/m/dcont over $T_0$, $\rightarrow \frac{f(t_0^+) + f(t_0^-)}{2}$
+    S: fin m/m/dcont over $T_0$, $\ra \frac{f(t_0^+) + f(t_0^-)}{2}$
 \rule{\linewidth}{0.5pt}
-    Time shift: $f(t-t_0)\leftrightarrow F_n e^{-jn(\omega_0 t_0)}$, $|F_n|$ same, $\angle F_n$ shifted by $-(\omega_0 t_0)n$
+    Time shift: $f(t-t_0)\lra F_n e^{-jn(\omega_0 t_0)}$, $|F_n|$ same, $\angle F_n$ shifted by $-(\omega_0 t_0)n$
 
-    Reversal: $f(-t)\leftrightarrow F_{-n}$
+    Reversal: $f(-t)\lra F_{-n}$
 
     Scal: $T = \sfrac {T_0} a$, $\omega = a\omega_0$
 
-    Multip (same $T_0$): $f(t) g(t) \leftrightarrow F_n * G_n$ 
+    Multip (same $T_0$): $f(t) g(t) \lra F_n * G_n$ 
         $\frac 1{T_0}  \int_{T_0} f(t) g(t) e^{jn\omega_0 t}\, dt$ =\\
         $ \frac{1}{T_0} \int (\sum F_m e^{jm\omega_0 t}) (\sum G_k e^{jk\omega_0 t}) e^{-jn\omega_0 t} \, dt$ \\
         $ = \sum_m \sum_k F_m G_k \frac{1}{T_0} \int_{T_0} e^{j(m+k-n)\omega_0 t} \, dt$\\
@@ -250,12 +251,12 @@
     \(=\sum_n \sum_m  F_n F_m^* \, \frac{1}{T_0}\int_{T_0} e^{j(n-m)\o_0t} dt\)\\
     \(=\sum_n |F_n|^2 \cdot 1\)
 
-        $f$ real $\rightarrow$ $|F|$ even, $\angle F$ odd\\
-        $f$ real, even $\rightarrow$ $F$ re, e; $F_{-n} = F_n = F_n^*$\\
-        $f$ re, od $\rightarrow$ $F$ im, o; $-F_{-n} = F_n = -F_n^*$
+        $f$ real $\ra$ $|F|$ even, $\angle F$ odd\\
+        $f$ real, even $\ra$ $F$ re, e; $F_{-n} = F_n = F_n^*$\\
+        $f$ re, od $\ra$ $F$ im, o; $-F_{-n} = F_n = -F_n^*$
 
-        $f_e(t) \leftrightarrow \mathrm{Re}\{ F_n\}$\\
-        $f_o(t) \leftrightarrow j \,\mathrm{Im} \{F_n\}$
+        $f_e(t) \lra \mathrm{Re}\{ F_n\}$\\
+        $f_o(t) \lra j \,\mathrm{Im} \{F_n\}$
 \rule{\linewidth}{0.5pt}
     Square ($A=1$, $T=2\pi$, $\omega = 1$) 
         $\frac{4}{\pi}(\cos t - \frac{1}{3}\cos 3t + \frac{1}{5} \cos 5t- ...)$\\
@@ -281,7 +282,7 @@
 
     \(F_n = \frac 1 {T_0} \int_{T_0} f(t) e^{-jn\omega_0 t} \, dt\)
 
-    Limit as $\omega_0 =\Delta\omega \rightarrow 0$,\\
+    Limit as $\omega_0 =\Delta\omega \ra 0$,\\
     \(F_n = \frac {\Delta\omega}{2\pi} \int f(t) e^{-jn\Delta\omega t} \, dt
     \equiv \frac{\Delta\omega}{2\pi} F(n\Delta\omega)\) % substitute t for n\Delta\omega
 
@@ -302,75 +303,75 @@
 
 \subsubsection{FT Table}
 
-    \(\delta(t) \leftrightarrow 1\)\\
-    $1 \leftrightarrow 2\pi\delta(\omega)$
+    \(\delta(t) \lra 1\)\\
+    $1 \lra 2\pi\delta(\omega)$
 
-    \(e^{j\o_0 t}\lra 2\pi\delta(\o - \o_0)\)\\         % inverse transform this, watch minus sign
-    \(\cos \o_0 t\lra \pi[\delta(\o+\o_0) + \delta(\o - \o_0)]\)\\
-    \(\sin \o_0 t\lra j\pi[\delta(\o + \o_0) - \delta(\o - \o_0)]\)
+    \(e^{j\o_0 t}\ra 2\pi\delta(\o - \o_0)\)\\         % inverse transform this, watch minus sign
+    \(\cos \o_0 t\ra \pi[\delta(\o+\o_0) + \delta(\o - \o_0)]\)\\
+    \(\sin \o_0 t\ra j\pi[\delta(\o + \o_0) - \delta(\o - \o_0)]\)
 
-    \(\sum \delta(t-nT_0) \lra \o_0\sum \delta(\o - n\o_0)\)        % what is omega_0
+    \(\sum \delta(t-nT_0) \ra \o_0\sum \delta(\o - n\o_0)\)        % what is omega_0
 
-    $e^{-at} \, u(t) \leftrightarrow \frac{1}{a+j\omega}$\\         % a > 0
-    $e^{-a|t|} \leftrightarrow \frac{2a}{a^2+\omega^2}$ \\
-    \(u(t) = \lim_{a\rightarrow 0} e^{-at} u(t)\lra \lim \frac{1}{a+j\o}\)
+    $e^{-at} \, u(t) \lra \frac{1}{a+j\omega}$\\         % a > 0
+    $e^{-a|t|} \lra \frac{2a}{a^2+\omega^2}$ \\
+    \(u(t) = \lim_{a\ra 0} e^{-at} u(t)\ra \lim \frac{1}{a+j\o}\)
     \( = \lim(\frac{a}{a^2+\o^2} - j\frac{\o}{a^2+\o^2 }) = \pi\delta(\o) + \frac{1}{j\o}\) \\      % acrtan integral to get pi
-    \(\sgn(t)\lra \frac{2}{j\o}\)
+    \(\sgn(t)\ra \frac{2}{j\o}\)
 
-    \(t^n e^{-at} u(t)\lra \frac{n!}{(a+j\o)^{n+1}}\)
+    \(t^n e^{-at} u(t)\ra \frac{n!}{(a+j\o)^{n+1}}\)
 
-    \(\c \o_0 t\, u(t)\lra \frac{\pi}{2}(\delta(-) + \delta(+)) + \frac{j\o}{\o_0^2-\o^2}\)\\       % write out - and +
-    \(\sin \o_0 t\, u(t)\lra \frac{\pi}{2j}(\delta(-) - \delta(+)) + \frac{\o_0}{\o_0^2-\o^2}\)\\
-    \(e^{-at}\cos \o_0t\, u(t)\lra \frac{a+j\o}{(a+j\o)^2 + \o_0^2}\)\\
-    \(e^{-at}\sin \o_0t\, u(t)\lra \frac{\o_0}{(a+j\o)^2 + \o_0^2}\)           
+    \(\c \o_0 t\, u(t)\ra \frac{\pi}{2}(\delta(-) + \delta(+)) + \frac{j\o}{\o_0^2-\o^2}\)\\       % write out - and +
+    \(\sin \o_0 t\, u(t)\ra \frac{\pi}{2j}(\delta(-) - \delta(+)) + \frac{\o_0}{\o_0^2-\o^2}\)\\
+    \(e^{-at}\cos \o_0t\, u(t)\ra \frac{a+j\o}{(a+j\o)^2 + \o_0^2}\)\\
+    \(e^{-at}\sin \o_0t\, u(t)\ra \frac{\o_0}{(a+j\o)^2 + \o_0^2}\)           
 
 
     % width \tau, draw a diagram
-    $\rect(\frac t {\tau}) \lra \tau \sinc(\frac{\tau}{2}\omega)$\\ 
-    $\frac W \pi \sinc(Wt) \lra \rect(\frac{\omega}{2W})$
+    $\rect(\frac t {\tau}) \ra \tau \sinc(\frac{\tau}{2}\omega)$\\ 
+    $\frac W \pi \sinc(Wt) \ra \rect(\frac{\omega}{2W})$
 
     % draw a diagram as well
-    \(\triangle (\frac t {\tau}) \lra \frac{\tau}{2} \sinc^2 (\frac{\tau}{4}\omega)\)\\
-    \(\frac{W}{2\pi} \sinc^2 (\frac{W}{2}t) \lra \triangle(\frac{\omega}{2W})\)
+    \(\triangle (\frac t {\tau}) \ra \frac{\tau}{2} \sinc^2 (\frac{\tau}{4}\omega)\)\\
+    \(\frac{W}{2\pi} \sinc^2 (\frac{W}{2}t) \ra \triangle(\frac{\omega}{2W})\)
 
     \([\o^2 \r(\frac{\o}{2\o_0})] \leftarrow \frac{1}{2\pi} \frac{e^{j\o t}}{(jt)^3}(-\o^2t^2-2j\o t + 2)^{\o_0}_{-\o_0}\)\\
     \(=\frac{(\o_0^2 t^2 - 2)\sin \o_0 t + 2\o_0 t\cos \o_0 t}{\pi t^3}\)\
 
     \([\frac{|\o|}{\o_0} \rect(\frac{\o}{2\o_0})] \leftarrow \frac{\cos \o_0 t + \o_0 t \sin \o_0 t - 1}{\o_0 \pi t^2}\)
-    \columnbreak
+   % \columnbreak
 \subsubsection{Frequency domain properties}
     Linearity
 
-    Time shift: \(f(t-t_0) \lra F(\omega) e^{-jt_0\omega}\) \\ % highlight negative signS
+    Time shift: \(f(t-t_0) \ra F(\omega) e^{-jt_0\omega}\) \\ % highlight negative signS
     $|F|$ unchanged; $\angle F =- t_0\omega$, lin shift
 
-    Freq shift: \(f(t) e^{j\omega_0 t} \lra F(\omega - \omega_0)\)  % watch sign, again
+    Freq shift: \(f(t) e^{j\omega_0 t} \ra F(\omega - \omega_0)\)  % watch sign, again
 
-    t-f dual \(f(t) \lra F(\omega)\), \(F(t) \lra 2\pi f(-\omega)\)\\ 
+    t-f dual \(f(t) \ra F(\omega)\), \(F(t) \ra 2\pi f(-\omega)\)\\ 
     Pf. \(f(t) = \frac 1 {2\pi} \int F(\lambda) e^{jt\lambda}\, d\lambda\)\\
     % highlight the -t here
     \(2\pi f(-t) = \int F(\lambda) e^{-tj\lambda}\, d\lambda = \mathcal{F}[F(\lambda)]\)
 
-    Reversal: \(f(-t)\lra F(-\o)\)
+    Reversal: \(f(-t)\ra F(-\o)\)
 
-    Scaling: \(f(at)\lra \frac{1}{|a|}F(\frac{\o}{a})\)   % compress in t, expand in omega
+    Scaling: \(f(at)\ra \frac{1}{|a|}F(\frac{\o}{a})\)   % compress in t, expand in omega
 
-    Convolution: \(f*g \lra FG\), \(fg \lra \frac{1}{2\pi} F*G\)\\
+    Convolution: \(f*g \ra FG\), \(fg \ra \frac{1}{2\pi} F*G\)\\
     \(\mathcal F[f*g] = \int e^{-j\o t} \int f(\tau) g(t-\tau)d\tau dt =\int f(\tau) \mathcal F[g(t-\tau)]  d\tau = \int f(\tau) G(\o)e^{-j\o\tau}d\tau\)\\
     % highlight above for the other direction
     \( \frac{1}{2\pi} \mathcal{F}^{-1}[F * G] = (\frac{1}{2\pi})^2 \int e^{j\o t} \int F(\lambda) G(\o - \lambda) d\lambda d\o\)
 
-    Diff: \(f^{(n)}(t) \lra (j\o)^nF(\o)\) (diff $e^{j\o t}$)    % highlight j\omega
+    Diff: \(f^{(n)}(t) \ra (j\o)^nF(\o)\) (diff $e^{j\o t}$)    % highlight j\omega
     
-    Int: \(\int_{-\infty}^t f(\tau)d\tau \lra \frac{1}{j\o}F(\o) + \pi F(0) \delta(\o)\)\\
+    Int: \(\int_{-\infty}^t f(\tau)d\tau \ra \frac{1}{j\o}F(\o) + \pi F(0) \delta(\o)\)\\
     \(U(\o) = \lim \frac{1}{a+j\o} = \lim (\frac{a}{a^2+\o^2} - j\frac{\o}{a^2+\o^2}) \) \\
     \(= \pi\delta(\o) + \frac{1}{j\o}\) ($\int \frac{a}{\o^2+a^2}d\o = \tan^{-1}=\pi$)\\
-    $\int = f(t) * u(t) \lra F(\o)U(\o)$
+    $\int = f(t) * u(t) \ra F(\o)U(\o)$
 
-    Conjugation: \(f(t)^* \lra F(-\o)^*\)   % highlight negative
+    Conjugation: \(f(t)^* \ra F(-\o)^*\)   % highlight negative
 
-    Sym: Re $\lra$ $||$ e, $\angle$ o ($F(-\o) = F(\o)^*$);\\
-    re, e $\lra$ re, e; re, o $\lra$ im, o
+    Sym: Re $\ra$ $||$ e, $\angle$ o ($F(-\o) = F(\o)^*$);\\
+    re, e $\ra$ re, e; re, o $\ra$ im, o
 
     $f$ even: \(F(\o) = 2\int_0^{\infty} f(t)\cos(\o t) dt\)\\
     $f$ odd: \(F(\o) = -2j\int_0^{\infty} f(t) \sin(\o t) dt\)
@@ -382,9 +383,9 @@
     \(= \frac{1}{2\pi}\int f(t) \int F(\lambda)^* e^{-jt\lambda} d\lambda dt = \int dt d\lambda\)
     \(\Delta E_f = \frac{2}{2\pi}\int^{\o_2}_{\o_1} |F(\o)|^2 d\o\) % highlight 2 due to +/-
 
-    Autocorrelation \(\psi_f(t) \equiv \int f(\tau)f(\tau-t)d\tau \lra |F(\o)|^2\)   % annotate for general case w/o abs
+    Autocorrelation \(\psi_f(t) \equiv \int f(\tau)f(\tau-t)d\tau \ra |F(\o)|^2\)   % annotate for general case w/o abs
 \subsubsection{AM}
-    \(m(t) \cos(\o_c t) \lra \frac{1}{2}[M(\o + \o_c) + M(\o - \o_c)]\)     % highlight M, may be a factor of pi
+    \(m(t) \cos(\o_c t) \ra \frac{1}{2}[M(\o + \o_c) + M(\o - \o_c)]\)     % highlight M, may be a factor of pi
     \(e(t) = m(t)\cos^2 \o_c t\)  \\          % highlight ^2
     \(E(\o) = \frac{1}{2} M + \frac{1}{4}[M(\o + 2\o_c) + M(\o - 2\o_c)]\)
 
@@ -395,13 +396,14 @@
 
     modulation index \(\mu\equiv f_{\text{max}}/A\)\\
     $\mu = \infty$, SC, $\mu = 1$, marginal
-\subsubsection{LTIC system transmission}
-    Let \(e^{j\o t} \rightarrow H(\o) e^{j\o t}\)
+\subsubsection{LTIC sys trans, (m) stable}
+    % p243
+    Let \(e^{j\o t} \Rightarrow H(\o) e^{j\o t}\)
 
     % left side is f(t), right side is response y(t)
     \(\lim\sum \frac{F(n\Delta\o)\Delta\o}{2\pi} e^{jn\Delta\o t}\)\\
-    \(\rightarrow \lim\sum \frac{F(n\Delta\o)H(n\Delta\o)\Delta\o}{2\pi} e^{jn\Delta\o t}\)
-    \(= \frac{1}{2\pi}\int F(\o)H(\o)e^{j\o t} d\o\)
+    \(\Rightarrow \lim\sum \frac{F(n\Delta\o)H(n\Delta\o)\Delta\o}{2\pi} e^{jn\Delta\o t}\)\\
+    \(y(t) = \frac{1}{2\pi}\int F(\o)H(\o)e^{j\o t} d\o\)
 
     \(Y(\o) = F(\o) H(\o)\)
 
@@ -447,5 +449,75 @@
     Practical sampling: \(p_T(t) = \frac{\tau}{T_s} + \sum(\frac{2}{\pi n}\sin(n\pi\frac{\tau}{T_s}))\cos(n\omega_s t)\)\\
     \(P_T(\o) = 2\pi \frac{\tau}{T_s}\delta(\o)\)
     \(+ \sum\frac{2\sin(...)}{n}[\delta(\o + n\o_s) + \delta(\o - n\o_s)]\)       % highlight first term
-\end{multicols}  
+
+\subsubsection{LT}
+Unilateral: \(\mathcal{L}[f] = \ulint f(t) e^{-st} dt\)\\          % highlight 0-, for unilateral
+\(= \int [f(t) e^{-\sigma t}] e^{-j\o t} dt\)
+
+$\sigma_0$: smallest $\sigma$ to make converge
+\subsubsection{Uni LT Table}
+    $\delta(t) \ra 1$\\
+    $u(t) \ra \frac{1}{s}$\\
+    $t^n u(t) \ra \frac{n!}{s^{n+1}}$               % highlight the u(t), also for e^t as well
+
+    \(e^{\lambda t} u(t) \ra \frac{1}{s-\lambda}\)\\        % highlight -
+    \(t^n e^{\lambda t} u(t) \ra \frac{n!}{(s-\lambda)^{n+1}}\)\\     % highlight +1
+    \(\frac{1}{(n-1)!} t^{n-1} e^{\lambda t} u(t) \ra \frac{1}{(s-\lambda)^n} \)        % highlight -1, just inverse of the above
+
+    \(e^{-at} \cos bt\, u(t) \ra \frac{s+a}{(s+a)^2 + b^2}\)\\
+    \(e^{-at} \sin bt\, u(t) \ra \frac{b}{(s+a)^2 + b^2}\)    
+
+    %highlight minus sign. Check this. I'm not sure
+    \(re^{-at} \cos(bt + \theta) u(t) \ra \frac{(r\cos\theta)s + (ar \cos\theta - br\sin \theta)}{s^2 + 2as + (a^2 + b^2)}\)\\
+    % highlight 2
+    \(2re^{-at} \cos(bt + \theta) u(t) \ra \frac{re^{j\theta}}{s-(a+jb)}+\frac{re^{-j\theta}}{s-(a-jb)}\)\\
+    \(e^{-at}\left[A\cos(b t) + \frac{B-Aa}{b}\sin(bt)\right] u(t) = \frac{\sqrt{A^2c + B^2 - 2ABa}}{b}e^{-at}\cos\left(bt + \tan^{-1}\frac{Aa-B}{Ab}\right) u(t) \ra \frac{As+B}{s^2+2as+c}\)
+\subsubsection{LT Prop}
+    Linearity\\
+    Time shift \(f(t-t_0) u(t-t_0) \ra F(s) e^{-st_0}\) Pf: \(\int_{-t_0}^{\infty}\)\\ % highlight -t0, and negative signs
+    % also highlight t0 in u
+    Freq shift \(f(t) e^{s_0 t} \ra F(s-s_0)\)\\
+    Scaling ($a > 0$), \(f(at) \ra \frac{1}{|a|} F(\frac{s}{a})\)\\   % a > 0 for causal
+    Convolution \(f_1 * f_2 \ra F_1 F_2\)
+
+    Time diff \(\dot{f}(t) \ra sF(s) - f(0^-)\)\\     % highlight s before F and -
+        Pf (parts): \(\ulint \dot{f}(t) e^{-st} dt = \left[f(t) e^{-st} \right]^{\infty}_{0^-} + s F(s)\)\\    % highlight s again
+    \(\ddot{f}(t) \ra s^2 F(s) - sf(0^-) - \dot{f}(0^-)\)   % highlight fdot, and minus signs
+
+    Time int \(\ulint f(\tau) d\tau \ra \frac{1}{s} F(s)\) Pf: diff     % highlight 0-, initial condition related
+
+    Freq diff \(-t f(t) \ra \frac{dF(s)}{ds}\)          % highlight negative
+
+    Freq int \(\frac{1}{t}\frac{f(t)}{t} \ra \int_s^{\infty}F(z) dz\)
+
+    IVT \(f(0^+) = \lim_{s\ra \infty} sF(s)\) if exists\\
+        Pf: \(\mathcal L[\dot{f} (t)] = \ulint \dot f(t) e^{-st} dt\)\\ % highlight dot
+        \(sF(s) - f(0^-) = \int_{0^-}^{0^+} \dot f (t) e^{-st} dt + \int _{0^+}^{\infty} \dot f(t) e^{-st} dt \)\\    % last term goes away as s -> \inf
+        \(sF(s) - f(0^-) = f(0^+) - f(0^-)\)    % cancel f0-
+
+    FVT \(f(\infty) = \lim_{s\ra 0} sF(s)\) if exists\\
+        Pf: \(\mathcal L[\dot{f} (t)] = \ulint \dot f(t) e^{-st} dt\)\\ % highlight dot, can delete this line
+        \(\lim_{s\ra 0} sF(s) - f(0^-) = \lim_{s\ra 0}\ulint \dot f (t) e^{-st} dt\)\\    % e^-st = 1
+        \(sF(s) - f(0^-) = f(\infty) - f(0^-)\)    % cancel f0-
+
+
+\subsubsection{Rational $\mathcal L^{-1}$}
+    \(F(s) = \frac{b_ms^m + ... + b_1s + b_0}{s^n + ... + a_1s + a_0} \equiv \frac{P(s)}{Q(s)}\)
+
+    \(k = (s-\lambda_i) F(s) | _{s = \lambda_i}\)
+
+    % highlight ^r in both cases, and m
+    \(a_0 = (s-\lambda)^r F(s)|_{s=\lambda}\)\\
+    \(a_m = \frac{1}{m!} \frac{d^m}{ds^m}[(s-\lambda)^r F(s)] |_{s = \lambda}\)
+%\end{multicols}  
+
+\subsubsection{Sys Anal}
+    $H(s) = \frac{Y_{zs}(s)}{F(s)} = \frac{P(s)}{Q(s)}$  % highlight order, P/Q, not Q/P
+
+    Asym.\\
+    stable: $y_{zi}(t) \ra 0$ as $t\ra \infty$\\
+    marginal: $y_{zi}(t)$ remains bounded (unrep $\lambda$ on Im axis)
+
+
+
 \end{document}
