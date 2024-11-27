@@ -1,20 +1,17 @@
 \documentclass[4pt]{article}
 \usepackage[margin=0.2in,top=0.3in,bottom=0.3in]{geometry}
 \usepackage{multicol}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{fancyhdr}
 \usepackage{parskip}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
-\usepackage{tikz}
 \usepackage{siunitx}
 \usepackage{esint}
 \usepackage{hanging}
 \usepackage{xfrac}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
 \pagenumbering{gobble}
 
 
@@ -23,33 +20,21 @@
 \theoremstyle{definition}
 \newtheorem*{lemma}{Lemma}
 \renewcommand{\qed}{\hfill\blacksquare}
-\newcolumntype{Y}{>{\centering\arraybackslash}X}
-
 \renewcommand{\c}{\mathrm{c}\,}
 \newcommand{\s}{\mathrm{s}\,}
-\renewcommand{\r}{\mathrm{r}\,}
-\newcommand{\ulint}{\int_{0^-}^{\infty}}    % unilateral LT integral
+\renewcommand{\r}{\mathrm{r}\,}             % abbreviation for rect()
 \renewcommand{\o}{\omega}
 \newcommand{\ra}{\rightarrow}
 \newcommand{\lra}{\leftrightarrow}
-
-\usepackage{graphicx}
-
-\def\rcurs{{\mbox{$\resizebox{.16in}{.08in}{\includegraphics{ScriptR}}$}}}
-\def\brcurs{{\mbox{$\resizebox{.16in}{.08in}{\includegraphics{BoldR}}$}}}
-\def\hrcurs{{\mbox{$\hat \brcurs$}}}
-
+\newcommand{\ulint}{\int_{0^-}^{\infty}}    % Unilateral Lt INTegral
 \DeclareMathOperator{\rect}{rect}
 \DeclareMathOperator{\sinc}{sinc}
 \DeclareMathOperator{\sgn}{sgn}
 
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
 
-\DeclareSIUnit\atmosphere{atm}
-\DeclareSIUnit\molecule{molecule}
-\DeclareSIUnit\cal{calorie}
-\DeclareSIUnit\ev{eV}
 
-\title{Signals and Systems Exam 2}
+\title{Signals and Systems Exam 3}
 %\usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry} % Adjust page margins
 \usepackage{fancyhdr} % For custom headers and footers
 
@@ -68,14 +53,15 @@
     $\cos x \cos y = \sfrac{1}{2}[\cos(x-y) + \cos(x+y)]$\\
     $\sin x \cos y = \sfrac{1}{2}[\sin(x-y) + \sin(x+y)]$
 
-    $C \c(\o_0 t + \theta) = C\,\c(\theta) \,\c(\omega_0 t) - C\s(\theta)\s(\o_0 t)$
+    $C \c(\o_0 t + \theta) = C\,\c(\theta) \,\c(\o_0 t) - C\,\s(\o_0)\,\s(\o_0 t)$\\        % highlight minus in cosine
+    $C \s(\o_0 t + \theta) = C\,\s(\theta) \,\c(\o_0 t) + C\,\c(\o_0)\,\s(\o_0 t)$
 
     $\theta = \tan^{-1} (-b/a)$, $\pm \pi$ when $a<0$\\
     $\sin t = \cos (t-\pi/2)$
 
     $\cos x = \frac{1}{2}\,[e^{jx} + e^{-jx}]$\\
     $\sin x = \frac{1}{2j}\, [e^{jx} - e^{-jx}]$\\
-    $e^{j\omega t} = \cos(\omega t) + j\sin (\omega t)$
+    $e^{j\o t} = \cos(\o t) + j\sin (\o t)$
 
     $z^* = a-jb = re^{-j\theta}$\\
     $u^* v^* = (uv)^*$
@@ -212,17 +198,17 @@
 %\vfill\null
 %\columnbreak 
     $a_0 = \frac{1}{T_0} \int_{T_0} f(t)\, dt$\\
-    $a_n = \frac{2}{T_0} \int_{T_0} f(t) \cos(n\omega_0t)\,dt$\\
-    $b_n = \frac{2}{T_0} \int_{T_0} f(t) \sin(n\omega_0t)\,dt$\\
+    $a_n = \frac{2}{T_0} \int_{T_0} f(t) \cos(n\o_0t)\,dt$\\
+    $b_n = \frac{2}{T_0} \int_{T_0} f(t) \sin(n\o_0t)\,dt$\\
     Energy: $T_0$ for $n=0$; $T_0/2$ else
      
     Half-w sym: $f(t - \sfrac{T_0}{2}) = -f(t)$\\
-    $a_{n_\mathrm{odd}} = \frac{4}{T_0}\int_{0}^{T_0/2} f(t) \cos (n\omega_0 t) \, dt$
+    $a_{n_\mathrm{odd}} = \frac{4}{T_0}\int_{0}^{T_0/2} f(t) \cos (n\o_0 t) \, dt$
 
-    $f(t) = \sum_{n=-\infty}^{\infty} F_n e^{jn\omega_0 t}$\\
-    $F_n = \frac{1}{T_0}\int_{T_0} f(t) e^{-jn\omega_0t}\,dt$
+    $f(t) = \sum_{n=-\infty}^{\infty} F_n e^{jn\o_0 t}$\\
+    $F_n = \frac{1}{T_0}\int_{T_0} f(t) e^{-jn\o_0t}\,dt$
 
-    $C_n\cos(n\omega_0 t + \theta_n) = \sfrac{C_n}{2} \, (e^{j(n\omega_0t + \theta_n)} + e^{-j(n\omega_0 t + \theta_n)}) = (\frac{C_n} 2 e^{j\theta_n}) e^{jn\omega_0 t} + (\frac{C_n} 2 e^{-j\theta_n}) e^{-jn\omega_0 t}$
+    $C_n\cos(n\o_0 t + \theta_n) = \sfrac{C_n}{2} \, (e^{j(n\o_0t + \theta_n)} + e^{-j(n\o_0 t + \theta_n)}) = (\frac{C_n} 2 e^{j\theta_n}) e^{jn\o_0 t} + (\frac{C_n} 2 e^{-j\theta_n}) e^{-jn\o_0 t}$
 
     $F_n = \frac{C_n}{2}\, e^{j\theta_n} = \frac 1 2 (a_n - jb_n) = |F_n| e^{j\angle F_n}$\\
     $F_{-n} = \frac{C_n}{2}\, e^{-j\theta_n}$
@@ -231,17 +217,17 @@
 
     S: fin m/m/dcont over $T_0$, $\ra \frac{f(t_0^+) + f(t_0^-)}{2}$
 \rule{\linewidth}{0.5pt}
-    Time shift: $f(t-t_0)\lra F_n e^{-jn(\omega_0 t_0)}$, $|F_n|$ same, $\angle F_n$ shifted by $-(\omega_0 t_0)n$
+    Time shift: $f(t-t_0)\lra F_n e^{-jn(\o_0 t_0)}$, $|F_n|$ same, $\angle F_n$ shifted by $-(\o_0 t_0)n$
 
     Reversal: $f(-t)\lra F_{-n}$
 
-    Scal: $T = \sfrac {T_0} a$, $\omega = a\omega_0$
+    Scal: $T = \sfrac {T_0} a$, $\o = a\o_0$
 
     Multip (same $T_0$): $f(t) g(t) \lra F_n * G_n$ 
-        $\frac 1{T_0}  \int_{T_0} f(t) g(t) e^{jn\omega_0 t}\, dt$ =\\
-        $ \frac{1}{T_0} \int (\sum F_m e^{jm\omega_0 t}) (\sum G_k e^{jk\omega_0 t}) e^{-jn\omega_0 t} \, dt$ \\
-        $ = \sum_m \sum_k F_m G_k \frac{1}{T_0} \int_{T_0} e^{j(m+k-n)\omega_0 t} \, dt$\\
-        $ = \sum_m \sum_k F_m G_k \langle e^{j(m+k)\omega_0 t}, e^{jn\omega_0 t}\rangle$\\
+        $\frac 1{T_0}  \int_{T_0} f(t) g(t) e^{jn\o_0 t}\, dt$ =\\
+        $ \frac{1}{T_0} \int (\sum F_m e^{jm\o_0 t}) (\sum G_k e^{jk\o_0 t}) e^{-jn\o_0 t} \, dt$ \\
+        $ = \sum_m \sum_k F_m G_k \frac{1}{T_0} \int_{T_0} e^{j(m+k-n)\o_0 t} \, dt$\\
+        $ = \sum_m \sum_k F_m G_k \langle e^{j(m+k)\o_0 t}, e^{jn\o_0 t}\rangle$\\
         $ = \sum_{k=-\infty}^{\infty} G_k F_{n-k}$
         
     Conjugation: $f(t)^* = F^*_{-n}$
@@ -478,7 +464,8 @@ $\sigma_0$: smallest $\sigma$ to make converge
     % also highlight t0 in u
     Freq shift \(f(t) e^{s_0 t} \ra F(s-s_0)\)\\
     Scaling ($a > 0$), \(f(at) \ra \frac{1}{|a|} F(\frac{s}{a})\)\\   % a > 0 for causal
-    Convolution \(f_1 * f_2 \ra F_1 F_2\)
+    Convolution \(f_1 * f_2 \ra F_1 F_2\)\\
+    \(f_1 f_2 \ra \frac{1}{2\pi j} F_1 * F_2\)
 
     Time diff \(\dot{f}(t) \ra sF(s) - f(0^-)\)\\     % highlight s before F and -
         Pf (parts): \(\ulint \dot{f}(t) e^{-st} dt = \left[f(t) e^{-st} \right]^{\infty}_{0^-} + s F(s)\)\\    % highlight s again
@@ -514,10 +501,32 @@ $\sigma_0$: smallest $\sigma$ to make converge
 \subsubsection{Sys Anal}
     $H(s) = \frac{Y_{zs}(s)}{F(s)} = \frac{P(s)}{Q(s)}$  % highlight order, P/Q, not Q/P
 
-    Asym.\\
+    Asym. $(y_{zi} (t)$ dies out)\\         % highlight zi
     stable: $y_{zi}(t) \ra 0$ as $t\ra \infty$\\
-    marginal: $y_{zi}(t)$ remains bounded (unrep $\lambda$ on Im axis)
+    marginal: $y_{zi}(t)$ remains bounded (unrep $\lambda$ on Im axis)B
 
+    BIBO iff \(\int_{-\infty}^{\infty} |h(t)| dt\) exists\\ % highlight abs
+    Pf. $\Rightarrow$. $|f(t)| < K$\\                       % highlight zs
+    \(y_{zs}(t) = h * f = \int h(\tau) f(t-\tau) d\tau \leq \int |h||f| d\tau < K \int |h(\tau)| d\tau\)\\
+    $\Leftarrow$. Let $f(t) = \sgn(h(-t))$\\                % contrapositive
+    \(y(0) = \int h(\tau) f(0-\tau) d\tau = \int h(\tau) \sgn(h(\tau)) d\tau  = \int |h(\tau)| d\tau \equiv \infty\)
+
+    Asy $\rightarrow$ BIBO (all exp)\\                                % not the other way
+    Asy m. $\rightarrow$ BIBO u. ($\int |\sin|$)                            % cross BIBO
+
+\subsubsection{Sys Realization}         % draw a diagraom for that
+    Feedback: \(Y = GE = G(F - HGY)\)\\
+    \(H_{\text{eff}} = \frac{Y} F = \frac G {1+HG}\)
+
+    Canonical:\\              % diagram
+    Always make $a_n = 1$\\
+    \(F = s^2 X + a_1 sX + a_0 X\)\\
+    \(s^2 X = F - a_1 sX - a_0 X\)      % highlight minus
+
+    \(b_2 s^2 X + b_1 sX + b_0 X = Y\)
+
+    Same pole                           % diagram for that, draw s-domain first, and then fully realize
+    % can you save a few summers for the parallel cases?
 
 
 \end{document}
