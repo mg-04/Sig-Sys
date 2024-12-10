@@ -31,6 +31,8 @@
 \DeclareMathOperator{\sinc}{sinc}
 \DeclareMathOperator{\sgn}{sgn}
 
+
+
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 
 
@@ -40,7 +42,7 @@
 
 \begin{document}
 \raggedright
-%\begin{multicols}{3} % Use 3 columns
+\begin{multicols}{3} % Use 3 columns
     $\arctan(\frac{1}{\sqrt{3}}) = \frac{\pi}{6}$,  $\arctan(\sqrt{3}) = \frac{\pi} 3$
 
     $\sin n\pi = 0$\\
@@ -211,7 +213,7 @@
     $C_n\cos(n\o_0 t + \theta_n) = \sfrac{C_n}{2} \, (e^{j(n\o_0t + \theta_n)} + e^{-j(n\o_0 t + \theta_n)}) = (\frac{C_n} 2 e^{j\theta_n}) e^{jn\o_0 t} + (\frac{C_n} 2 e^{-j\theta_n}) e^{-jn\o_0 t}$
 
     $F_n = \frac{C_n}{2}\, e^{j\theta_n} = \frac 1 2 (a_n - jb_n) = |F_n| e^{j\angle F_n}$\\
-    $F_{-n} = \frac{C_n}{2}\, e^{-j\theta_n}$
+    $F_{-n} = \frac{C_n}{2}\, e^{-j\theta_n} - \frac 1 2 (a_n + jb_n)$  % highlight the + and -!!, opposite
 \rule{\linewidth}{0.5pt}
     W: finite $\int$, fin $a$, $b$, fin power
 
@@ -298,8 +300,8 @@
 
     \(\sum \delta(t-nT_0) \ra \o_0\sum \delta(\o - n\o_0)\)        % what is omega_0
 
-    $e^{-at} \, u(t) \lra \frac{1}{a+j\omega}$\\         % a > 0
-    $e^{-a|t|} \lra \frac{2a}{a^2+\omega^2}$ \\
+    $e^{-at} \, u(t) \ra \frac{1}{a+j\omega}$\\         % a > 0
+    $e^{-a|t|} \ra \frac{2a}{a^2+\omega^2}$ \\
     \(u(t) = \lim_{a\ra 0} e^{-at} u(t)\ra \lim \frac{1}{a+j\o}\)
     \( = \lim(\frac{a}{a^2+\o^2} - j\frac{\o}{a^2+\o^2 }) = \pi\delta(\o) + \frac{1}{j\o}\) \\      % acrtan integral to get pi
     \(\sgn(t)\ra \frac{2}{j\o}\)
@@ -333,7 +335,7 @@
 
     Freq shift: \(f(t) e^{j\omega_0 t} \ra F(\omega - \omega_0)\)  % watch sign, again
 
-    t-f dual \(f(t) \ra F(\omega)\), \(F(t) \ra 2\pi f(-\omega)\)\\ 
+    Dual: \(f(t) \ra F(\omega)\), \(F(t) \ra 2\pi f(-\omega)\)\\ 
     Pf. \(f(t) = \frac 1 {2\pi} \int F(\lambda) e^{jt\lambda}\, d\lambda\)\\
     % highlight the -t here
     \(2\pi f(-t) = \int F(\lambda) e^{-tj\lambda}\, d\lambda = \mathcal{F}[F(\lambda)]\)
@@ -371,7 +373,7 @@
 
     Autocorrelation \(\psi_f(t) \equiv \int f(\tau)f(\tau-t)d\tau \ra |F(\o)|^2\)   % annotate for general case w/o abs
 \subsubsection{AM}
-    \(m(t) \cos(\o_c t) \ra \frac{1}{2}[M(\o + \o_c) + M(\o - \o_c)]\)     % highlight M, may be a factor of pi
+    \(m(t) \cos(\o_c t) \ra \frac{1}{2}[M(\o + \o_c) + M(\o - \o_c)]\)\\     % highlight M, may be a factor of pi
     \(e(t) = m(t)\cos^2 \o_c t\)  \\          % highlight ^2
     \(E(\o) = \frac{1}{2} M + \frac{1}{4}[M(\o + 2\o_c) + M(\o - 2\o_c)]\)
 
@@ -400,7 +402,7 @@
     \(\hat{h}(t) = h(t) u(t)\)
 
 \subsubsection{Periodic FT}
-    \(f(t) = \sum F_n e^{jn\o_0 t}\), \(\mathcal{F}[f(t)] = 2\pi \sum F_n \delta(\omega - n\o_0)\)      % highlight n!
+    \(f(t) = \sum_n F_n e^{jn\o_0 t}\), \(\mathcal{F}[f(t)] = 2\pi \sum_n F_n \delta(\omega - n\o_0)\)      % highlight n!
 
     \(Y = F(\omega)H(\omega) = 2\pi \sum F_n H(n\omega_0) \delta(\omega - n\omega_0) \) \\            % due to delta
     $Y_n \equiv F_n H(n\o_0)$. Periodic with same $\omega_0$
@@ -411,7 +413,7 @@
     \(y = \frac 1 2 (e^{j(\theta + \o_0 t)}H(\o_0) + e^{-j(\theta + \o_0 t)}H(-\o_0))\)\\          % highlight -\omega_0
     \(=|H(\o_0)| \cos(\o_0t + \theta + \angle H(\o_0))\)
 
-    \(\cos 2t * e^{-3t} u(t) \equiv f * h\)\\       % highlight 2 in both lines
+    \(\cos 2t * e^{-3t}\, u(t) \equiv f * h\)\\       % highlight 2 in both lines
     \(=|H(2)| \cos(2t + \angle H(2))\)              % you can just directly shift on the angle of trig
 \subsubsection {Sampling}
     \(\overline{f}(t)\equiv f(t) \delta_{T_s}(t) = \sum f(nT_s) \delta(t - nT_s)\)\\
@@ -428,7 +430,7 @@
     ana FS, basis: $\sinc$, interpolation formula
 
     If $F_s > 2B$, \(f(t) = \sum f(nT_s) w(t - nT_s)\)\\
-    for some relaxed filter $w(t)$
+    for some relaxed LP filter $w(t)$
 
     Anti-alias before sampling: LPF of $F_s/2$
 
@@ -437,18 +439,25 @@
     \(+ \sum\frac{2\sin(...)}{n}[\delta(\o + n\o_s) + \delta(\o - n\o_s)]\)       % highlight first term
 
 \subsubsection{LT}
+\(\mathcal L [-e^{-at}u(-t)] = \mathcal L [e^{-at} u(t)]\), except ROC\\
+If sig are causal, $\mathcal L$ is 1-to-1           % highlight causal
+
 Unilateral: \(\mathcal{L}[f] = \ulint f(t) e^{-st} dt\)\\          % highlight 0-, for unilateral
 \(= \int [f(t) e^{-\sigma t}] e^{-j\o t} dt\)
 
+
 $\sigma_0$: smallest $\sigma$ to make converge
 \subsubsection{Uni LT Table}
-    $\delta(t) \ra 1$\\
-    $u(t) \ra \frac{1}{s}$\\
+    Watch ROC!!     % highlight
+
+    $\delta(t) \ra 1$ ($\forall s$)\\
+    $u(t) \ra \frac{1}{s}$ ($\Re(s) > 0$)\\
     $t^n u(t) \ra \frac{n!}{s^{n+1}}$               % highlight the u(t), also for e^t as well
 
-    \(e^{\lambda t} u(t) \ra \frac{1}{s-\lambda}\)\\        % highlight -
+    \(e^{\lambda t} u(t) \ra \frac{1}{s-\lambda}\) ($\Re(s) > \Re(\lambda)$)\\        % highlight -
     \(t^n e^{\lambda t} u(t) \ra \frac{n!}{(s-\lambda)^{n+1}}\)\\     % highlight +1
     \(\frac{1}{(n-1)!} t^{n-1} e^{\lambda t} u(t) \ra \frac{1}{(s-\lambda)^n} \)        % highlight -1, just inverse of the above
+    % also highlight factorial!
 
     \(e^{-at} \cos bt\, u(t) \ra \frac{s+a}{(s+a)^2 + b^2}\)\\
     \(e^{-at} \sin bt\, u(t) \ra \frac{b}{(s+a)^2 + b^2}\)    
@@ -456,26 +465,29 @@ $\sigma_0$: smallest $\sigma$ to make converge
     %highlight minus sign. Check this. I'm not sure
     \(re^{-at} \cos(bt + \theta) u(t) \ra \frac{(r\cos\theta)s + (ar \cos\theta - br\sin \theta)}{s^2 + 2as + (a^2 + b^2)}\)\\
     % highlight 2
-    \(2re^{-at} \cos(bt + \theta) u(t) \ra \frac{re^{j\theta}}{s-(a+jb)}+\frac{re^{-j\theta}}{s-(a-jb)}\)\\
+    \(2re^{-at} \cos(bt + \theta) u(t) \ra \frac{re^{j\theta}}{s-(-a+jb)}+\frac{re^{-j\theta}}{s-(-a-jb)}\)\\
     \(e^{-at}\left[A\cos(b t) + \frac{B-Aa}{b}\sin(bt)\right] u(t) = \frac{\sqrt{A^2c + B^2 - 2ABa}}{b}e^{-at}\cos\left(bt + \tan^{-1}\frac{Aa-B}{Ab}\right) u(t) \ra \frac{As+B}{s^2+2as+c}\)
 \subsubsection{LT Prop}
-    Linearity\\
-    Time shift \(f(t-t_0) u(t-t_0) \ra F(s) e^{-st_0}\) Pf: \(\int_{-t_0}^{\infty}\)\\ % highlight -t0, and negative signs
+    Linearity (ROC $\cap$)\\
+    Time delay \(f(t-t_0) u(t-t_0) \ra F(s) e^{-st_0}\), $t_0 > 0$ (same ROC)\\    % t0 > 0 for causal
+        Pf: \(\int_{-t_0}^{\infty}\)\\ % highlight -t0, and negative signs
     % also highlight t0 in u
-    Freq shift \(f(t) e^{s_0 t} \ra F(s-s_0)\)\\
-    Scaling ($a > 0$), \(f(at) \ra \frac{1}{|a|} F(\frac{s}{a})\)\\   % a > 0 for causal
-    Convolution \(f_1 * f_2 \ra F_1 F_2\)\\
+    Freq shift \(f(t) e^{s_0 t} \ra F(s-s_0)\) ($\Re(s) > \sigma_0 + \Re(s_0)$)\\
+    Scaling ($a > 0$), \(f(at) \ra \frac{1}{|a|} F(\frac{s}{a})\) ($\Re(s) > a\sigma_0 $)\\   % highlight a
+    % a > 0 for causal, may not need abs
+    Convolution \(f_1 * f_2 \ra F_1 F_2\) (ROC $\cap$)\\
     \(f_1 f_2 \ra \frac{1}{2\pi j} F_1 * F_2\)
 
-    Time diff \(\dot{f}(t) \ra sF(s) - f(0^-)\)\\     % highlight s before F and -
+    Time diff \(\dot{f}(t) \ra sF(s) - f(0^-)\) ($\Re(s) > \max(\sigma_0, 0)$)\\     % highlight s before F and -
         Pf (parts): \(\ulint \dot{f}(t) e^{-st} dt = \left[f(t) e^{-st} \right]^{\infty}_{0^-} + s F(s)\)\\    % highlight s again
     \(\ddot{f}(t) \ra s^2 F(s) - sf(0^-) - \dot{f}(0^-)\)   % highlight fdot, and minus signs
+    % When used to LT piecewise functions, remember f(0-) = 0, f'(0-) = 0
 
     Time int \(\ulint f(\tau) d\tau \ra \frac{1}{s} F(s)\) Pf: diff     % highlight 0-, initial condition related
 
     Freq diff \(-t f(t) \ra \frac{dF(s)}{ds}\)          % highlight negative
 
-    Freq int \(\frac{1}{t}\frac{f(t)}{t} \ra \int_s^{\infty}F(z) dz\)
+    Freq int \(\frac{1}{t}f(t) \ra \int_s^{\infty}F(z) dz\)
 
     IVT \(f(0^+) = \lim_{s\ra \infty} sF(s)\) if exists\\
         Pf: \(\mathcal L[\dot{f} (t)] = \ulint \dot f(t) e^{-st} dt\)\\ % highlight dot
@@ -489,6 +501,8 @@ $\sigma_0$: smallest $\sigma$ to make converge
 
 
 \subsubsection{Rational $\mathcal L^{-1}$}
+    First make it rational      % highlight this!
+
     \(F(s) = \frac{b_ms^m + ... + b_1s + b_0}{s^n + ... + a_1s + a_0} \equiv \frac{P(s)}{Q(s)}\)
 
     \(k = (s-\lambda_i) F(s) | _{s = \lambda_i}\)
@@ -496,10 +510,13 @@ $\sigma_0$: smallest $\sigma$ to make converge
     % highlight ^r in both cases, and m
     \(a_0 = (s-\lambda)^r F(s)|_{s=\lambda}\)\\
     \(a_m = \frac{1}{m!} \frac{d^m}{ds^m}[(s-\lambda)^r F(s)] |_{s = \lambda}\)
+
+    Multiply both by $s$ and let $s=\infty$, only $\frac{1}{s}$ term kept 
 %\end{multicols}  
 
 \subsubsection{Sys Anal}
-    $H(s) = \frac{Y_{zs}(s)}{F(s)} = \frac{P(s)}{Q(s)}$  % highlight order, P/Q, not Q/P
+    \(Q(D) y(t) = P(D) f(t)\)\\
+    $H(s) = \frac{Y_{zs}(s)}{F(s)} = \frac{P(s)}{Q(s)}$  % highlight order, P/Q, not Q/P; highlight zs
 
     Asym. $(y_{zi} (t)$ dies out)\\         % highlight zi
     stable: $y_{zi}(t) \ra 0$ as $t\ra \infty$\\
@@ -513,20 +530,187 @@ $\sigma_0$: smallest $\sigma$ to make converge
 
     Asy $\rightarrow$ BIBO (all exp)\\                                % not the other way
     Asy m. $\rightarrow$ BIBO u. ($\int |\sin|$)                            % cross BIBO
+    % counterexample? pole and zero cancel??
 
 \subsubsection{Sys Realization}         % draw a diagraom for that
+    % generally, m <= n
+    % show realization of simple 1/(s+l)
     Feedback: \(Y = GE = G(F - HGY)\)\\
     \(H_{\text{eff}} = \frac{Y} F = \frac G {1+HG}\)
 
     Canonical:\\              % diagram
+    % m < n here!
     Always make $a_n = 1$\\
     \(F = s^2 X + a_1 sX + a_0 X\)\\
     \(s^2 X = F - a_1 sX - a_0 X\)      % highlight minus
 
     \(b_2 s^2 X + b_1 sX + b_0 X = Y\)
 
-    Same pole                           % diagram for that, draw s-domain first, and then fully realize
     % can you save a few summers for the parallel cases?
 
+    \(H = \frac{b_1s+b_0}{1s^3+a_2s^2+a_1s+a_0}\)\\     % highlight 1 s^3
 
+    \(
+    \begin{bmatrix}
+        \dot{x}_1\\
+        \dot{x}_2\\
+        \dot{x}_3\\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        0 & 1 & 0\\
+        0 & 0 & 1\\
+        -a_0 & -a_1 & -a_2      % highlight diagonal pattern
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_1\\
+        x_2\\
+        x_3
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+        0\\0\\1         % always 0 0 1
+    \end{bmatrix}
+    f
+    \)\\
+
+    \(y =
+    \begin{bmatrix}
+        b_0 & b_1 & 0      % b_0, b_1, ..., b_m, 0, ..., 0
+    \end{bmatrix}
+    \cdot \mathbf x
+    \)\\
+    Second form: \(s^2 Y = s^2 b_2 F + s(-a_1 Y + b_1 F) + (-a_o Y + b_0 F)\)\\
+    \(Y = b_2 F + \frac 1 s(-a_1 Y + b_1 F) + \frac 1 {s^2}(-a_o Y + b_0 F)\)\\
+    Transpose $A$, swap $\mathbf b$, $\mathbf c$
+
+
+
+    Cascade:\\
+    Make complication in the center\\
+    \(H = \frac {P_1}{s+\lambda_1} \cdot \frac{P_2}{s+\lambda_2} \cdot \frac{k_3}{s+\lambda_3}\)\\
+    \(
+    \begin{bmatrix}
+        \dot{x}_1\\
+        \dot{x}_2\\
+        \dot{x}_3\\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        -\lambda_1 & 0 & 0\\
+        .. & -\lambda_2 & 0\\
+        .. & .. & -\lambda_3\\     % highlight lower triangular
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_1\\
+        x_2\\
+        x_3
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+        1\\..\\..         % always 1 x x
+    \end{bmatrix}
+    f
+    \)\\
+
+    \(y =
+    \begin{bmatrix}
+        .. & .. & k_3       % always x x 1
+    \end{bmatrix}
+    \cdot \mathbf x
+    \)
+
+    Parallel:\\
+    \(H = \frac{k_1}{s+\lambda_1} + \frac{k_2}{s+\lambda_2} + \frac{k_3}{s+\lambda_3}\)\\
+    \(
+    \begin{bmatrix}
+        \dot{x}_1\\
+        \dot{x}_2\\
+        \dot{x}_3\\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        -\lambda_1 & 0 & 0\\
+        0 & -\lambda_2 & 0\\
+        0 & 0 & -\lambda_3\\    % highlight diagonal
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_1\\
+        x_2\\
+        x_3
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+        1\\1\\1         % always 1 1 1
+    \end{bmatrix}
+    f
+    \)\\
+
+    \(y =
+    \begin{bmatrix}
+        k_1 & k_2 & k_3       % k_1, ..., k_n
+    \end{bmatrix}
+    \cdot \mathbf x
+    \)
+
+    Same pole                           % diagram for that, draw s-domain first, and then fully realize
+    \(H = \frac{a_0}{(s-\lambda)^2} + \frac{a_1}{s-\lambda} + \frac{k_1}{s-\alpha_1}\)      % highlight ^2
+
+
+\subsubsection{State Equations}
+    Def: state at any time $t_0$: smallest set of nums $\{x_i(t_0)\}$ that is sufficient to detemrine sys behavior $\forall t > t_0$ for given input $f$\\
+    Initial condition if $t_0 = 0$
+
+    Always int. output
+
+    \(\mathbf{\dot x} = A \mathbf x + \mathbf b f\)\\
+    \(y = \mathbf{c} \cdot \mathbf x\)
+
+    Multiple i/o:
+    \(\mathbf{\dot x} = A \mathbf x + \mathbf B \mathbf f\)\\
+    \(\mathbf y = \mathbf C \mathbf x + \mathbf D \mathbf f\)
+
+    \(s \mathbf X(s) - \mathbf x(0) = A \mathbf X(s) + \mathbf B \mathbf F(s)\)\\
+    \((s \mathbf I - \mathbf A) \mathbf X(s) = \mathbf x(0) + \mathbf B \mathbf F(s)\)\\
+    \(\mathbf X(s) = (s \mathbf I - \mathbf A)^{-1} \mathbf x(0) + (s \mathbf I - \mathbf A)^{-1} \mathbf B \mathbf F(s)\)\\
+    % zero input and zero state
+    substitute $\mathbf X$ for $\mathbf Y_{zi}$ and $\mathbf Y_{zs}$
+    
+
+
+
+\subsubsection{Frequency Response}
+    \(H(\o) = H(s)|_{s = j\o}\) % first H is F, second is L
+
+    % highlight abs
+    Ideal delay: \(|H| = 1, \angle(\o) = -\o T\)\\      % comes from exp(j..)
+    Ideal diff: \(|H(\o)| = |\o|, \angle H = \pm\frac {\pi} 2\)\\
+    Ideal int: \(|H(\o)| = \frac 1 {|\o|}\), \(\angle H = \mp \frac{\pi} 2\)
+    % symmetry for -omega
+
+    \(f(t) = e^{j\o_0 t}\, u(t)\) thru \(H(s) = \frac{P(s)}{Q(s)}\)\\   % highlight j and u(t)
+    \(Y_{zs}(s) = F(s) H(s)\)\\      % highlight zs!!
+    \(= \frac 1 {s - j\o_0} \frac{P(s)}{(s-\lambda_1)...(s-\lambda_n)}\)\\
+    \(= \frac{H(s)|_{s=j\o_0}}{s-j\o_0} + \frac{k_1}{s-\lambda_1} ...\)\\
+    \(y_{zs}(t) = H(\o_0)  e^{j\o_0 t} \, u(t) + \sum_i k_i e^{\lambda_i t} \, u(t)\)
+    % highlight u(t) on the last step, and zero state "zs"
+
+    $y_{ss}(t)$ scaled input\\
+    $y_{tr}(t)$ decays for stable sys
+
+    \(f(t) = \cos(\o_0 t + \theta) \, u(t)\)\\
+    \(y_{ss}(t) = |H(\o_0)| \cos(\o_0 t + \theta + \angle H(\o_0)) u(t)\)
+    % highlight ss and u(t)
+
+\subsubsection{Filter Design}
+    \(H(j\o) = b_n \frac{(j\o-z_1)..(j\o-z_n)}{(j\o-p_1)..(j\o-p_n)}\)\\\
+    \(= b_n \frac{(r_1 e^{j\phi_1})...(r_n e^{j\phi_n})}{(d_1 e^{j\theta_1})... (d_n e^{j\theta_n})}\)\\
+    \(|H(j\o)| = b_n \frac{r_1 ... r_n}{d_1 ... d_n}\)\\
+    \(\angle H(j\o) = (\phi_1 + .. + \phi_n) - (\theta_1 + .. + \theta_n)\)\\
+    % give a graphical example
+    % example of z = -1, p = -2 may be useful
+
+    Vector from p/z to $j\o$
+    % pole enhances gain, zero suppresses.
+\end{multicols}
 \end{document}
