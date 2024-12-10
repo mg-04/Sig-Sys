@@ -1,7 +1,10 @@
 \documentclass[4pt]{article}
-\usepackage[margin=0.2in,top=0.3in,bottom=0.3in]{geometry}
+\usepackage{pdflscape}
+\usepackage[margin=0.2in,top=0.1in,bottom=0.1in]{geometry}
 \usepackage{multicol}
 \usepackage{parskip}
+\usepackage{titlesec}
+\titlespacing*{\subsubsection}{0pt}{10pt}{*0}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -34,6 +37,10 @@
 
 
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
+\setlength{\abovedisplayskip}{0pt} % Space above display math
+\setlength{\belowdisplayskip}{0pt} % Space below display math
+\setlength{\abovedisplayshortskip}{0pt} % Space above when preceded by a short line
+\setlength{\belowdisplayshortskip}{0pt} % Space below when followed by a short line
 
 
 \title{Signals and Systems Exam 3}
@@ -41,8 +48,12 @@
 \usepackage{fancyhdr} % For custom headers and footers
 
 \begin{document}
+\begin{landscape}
 \raggedright
 \begin{multicols}{3} % Use 3 columns
+\raggedcolumns
+%\section*{Foundation}
+\subsubsection*{Algebra}
     $\arctan(\frac{1}{\sqrt{3}}) = \frac{\pi}{6}$,  $\arctan(\sqrt{3}) = \frac{\pi} 3$
 
     $\sin n\pi = 0$\\
@@ -55,8 +66,8 @@
     $\cos x \cos y = \sfrac{1}{2}[\cos(x-y) + \cos(x+y)]$\\
     $\sin x \cos y = \sfrac{1}{2}[\sin(x-y) + \sin(x+y)]$
 
-    $C \c(\o_0 t + \theta) = C\,\c(\theta) \,\c(\o_0 t) - C\,\s(\o_0)\,\s(\o_0 t)$\\        % highlight minus in cosine
-    $C \s(\o_0 t + \theta) = C\,\s(\theta) \,\c(\o_0 t) + C\,\c(\o_0)\,\s(\o_0 t)$
+    $C \cos(\o_0 t + \theta) = C\cos(\theta) \cos(\o_0 t) - C\sin(\o_0)\sin(\o_0 t)$\\        % highlight minus in cosine
+    $C \sin(\o_0 t + \theta) = C\sin(\theta) \cos(\o_0 t) + C\cos(\o_0)\sin(\o_0 t)$
 
     $\theta = \tan^{-1} (-b/a)$, $\pm \pi$ when $a<0$\\
     $\sin t = \cos (t-\pi/2)$
@@ -71,12 +82,15 @@
     $\angle z = \tan^{-1}(b/a)$, $\pm \pi$ in Q2 and Q3
 
     $z^{\frac 1 n} = r^{\frac 1 n} e^{j \frac{\theta + 2\pi m}{n}}$
-\rule{\linewidth}{0.5pt}
+
+    \((s+a)(s+b)(s+c) = s^3 + (a+b+c) s^2 + (ab+bc+ca)s + abc\)
+%\rule{\linewidth}{0.5pt}
+\subsubsection*{Integrals}
     % For sin, swap all explicit + with - and swap all cos with sin
     $\int \cos^2 at \, dt = \frac{t}{2} + \frac{\sin2at}{4a}$
 
     $\int t \cos at \, dt = \frac{1}{a^2}(\cos at + at\sin at)$\\
-    $\int t^2 \cos at\, dt = \frac{1}{a^3}(2at\c at - 2\s at + a^2t^2\s at)$
+    $\int t^2 \cos at\, dt = \frac{1}{a^3}(2at\cos at - 2\sin at + a^2t^2\sin at)$
 
     $\int te^{at}\, dt = \frac{1}{a^2} \, e^{at} (at-1)$\\
     $\int t^2 e^{at} \, dt = \frac{1}{a^3} \, e^{at} (a^2t^2 - 2at + 2)$
@@ -85,7 +99,19 @@
     bt + b \sin bt)$
 
     \(\int \frac{1} {x^2+a^2}\, dx = \frac{1}{a} \tan^{-1} \frac x a\)
-    \rule{\linewidth}{0.5pt}
+
+    \(
+        \setlength{\jot}{0pt} % reduce the space between lines
+\begin{aligned}
+    a &= b + c \\
+    x &= y + z \\
+    p &= q + r
+\end{aligned}
+\)
+
+
+\columnbreak
+\subsubsection*{Signals}
     $\mathcal{E}_f = \int_{-\infty}^{\infty} |f(t)|^2 dt$ (complex); \\
     $P_f = \lim_{T\ra\infty}\frac{1}{T} \int^{T/2}_{-T/2} |f(t)|^2 dt $; \\
     rms power $= \sqrt {P_f}$
@@ -96,7 +122,7 @@
     periodic (extension); 
     (non/anti)causal; 
     energy/power (both); 
-    deterministic/stochastic (carries info)
+    deterministic/stochastic (info)
 
     $\int f(t)\cdot \delta(t - t_0) dt = f(t_0)$ ($f$ cont at $t_0$)
     
@@ -105,7 +131,7 @@
 
     $f_e(t) = \sfrac{1}{2}[f(t) + f(-t)]$; \\
     $f_o(t) = \sfrac{1}{2}[f(t) - f(-t)]$
-\rule{\linewidth}{0.5pt}
+\subsubsection*{Systems}
     L: $\mathcal{T}[kf_1(t) + f_2(t)] = ky_1(t) + y_2(t)$.\\
     $\mathcal{T}$: $\sum_{k=0}a_k D^k \, y(t) = \sum_{l=0}b_lD^l\, f(t)$,\\
     L if $a_k$, $b_l$ are not functions of $y(t), f(t)$\\
@@ -117,13 +143,12 @@
 
 
     Causal: $y(t)$ dep only on $f(\tau)$, $\tau < t$. 
-    Just compare $t$ and $\tau$.
+    Compare $t$ and $\tau$.
     
     Ins/dyn: $y$ only dep $f$ at present (no $\int$)
     
     Invertible: given $y(t)$, we can know $f(t)$
-
-% new column here
+\subsubsection*{Conv prop}
     $c(t) \equiv \int_{-\infty}^{\infty} f(\tau) g(t-\tau) d\tau$
 
     $f * g = g * f$
@@ -142,7 +167,8 @@
 
 
     Graph: shift LEFT by $t$, and reflect. Every $\tau$ replaced by $t-\tau$, reverted
-\rule{\linewidth}{0.5pt}
+\columnbreak
+\subsubsection*{Conv table}
     $f(t) * \delta(t-T) = f(t-T)$
     
     $u(t) * u(t) = t \, u(t)$
@@ -160,7 +186,7 @@
     $t^m\, u(t) * t^n \, u(t) = \frac{m!n!}{(m+n+1)!}\, t^{m+n+1} \, u(t)$
 
     Don't forget $[u(t+T_1) - u(t-T_2)]$ term
-\rule{\linewidth}{0.5pt}
+\subsubsection*{Response}
     $Q(D) y(t) = P(D) f(t)$, typically $\int f$\\
     Assume causal input $f(t) u(t)$
 
@@ -170,18 +196,19 @@
         Let $h(t) = \mathcal{T} [\delta (t)]$ (impulse response)
         % More description here
             $y_{zs}(t)=\mathcal{T} [f(t)] = \mathcal{T} [f(t) * \delta (t)]$\\
-            $=\mathcal{T}[\lim\sum f(n\Delta\tau) \delta(t - n\Delta\tau) \Delta\tau]$\\
-            $=\lim\sum f(n\Delta\tau) h(t-n\Delta\tau)\Delta\tau = f * h$
+            \hspace{2.75em}$=\mathcal{T}[\lim\sum f(n\Delta\tau) \delta(t - n\Delta\tau) \Delta\tau]$\\
+            \hspace{2.75em}$=\lim\sum f(n\Delta\tau) h(t-n\Delta\tau)\Delta\tau = f * h$
             
         $y_{zi}(t)$ from ini, $f(t)=0$,
             $Q y_{zi}(t) = 0$;
             % same for the derivatives of y
             $y_{zi}(0^-) = y_{zi}(0^+)$, $\dot{y_{zi}}(0^-) = \dot{y_{zi}}(0^+)$
-\rule{\linewidth}{0.5pt}
-    $\mathcal{E}_e = \int_{t_1}^{t_2} [e(t)]^2 dt = \int_{t_1}^{t_2} f^2(t)dt$\\
-    $- 2\sum c_i \int_{t_1}^{t_2} f(t) x_i(t) dt + \int_{t_1}^{t_2} (\sum c_i x_i(t))^2 dt$\\
-    $    = \mathcal{E}_f -  2\sum_{c_i} \langle f, x_i \rangle +
-    (\sum c_i^2 \int_{t_1}^{t_2} x_i(t)^2 dt + \sum_{i\neq j} c_i c_j \int_{t_1}^{t_2} x_i(t) x_j(t) dt)$
+%\section{FS}
+\subsubsection*{Ortho set}
+    $\mathcal{E}_e = \int_{t_1}^{t_2} [e(t)]^2 dt$\\
+    $= \int_{t_1}^{t_2} f^2(t)dt - 2\sum c_i \int_{t_1}^{t_2} f(t) x_i(t) dt + \int_{t_1}^{t_2} (\sum c_i x_i(t))^2 dt$\\
+    $    = \mathcal{E}_f -  2\sum_{c_i} \langle f, x_i \rangle$\\
+    \hspace{1em}$+(\sum c_i^2 \int_{t_1}^{t_2} x_i(t)^2 dt + \sum_{i\neq j} c_i c_j \int_{t_1}^{t_2} x_i(t) x_j(t) dt)$
         
     $\frac{\partial \mathcal{E}_e}{\partial c_i} = 0 = -2 \langle f(t), x_i(t)\rangle + 2\mathcal{E}_i c_i$\\
     $\mathcal{E}_e^{\text{min}} = \mathcal{E}_f - \sum_{i=1}^N c_i^2 \mathcal{E}_i$
@@ -193,10 +220,10 @@
 
     $|u+v|^2 = |u|^2 + |v|^2 + u^*v + v^*u$
 
-    $\langle x(t), y(t)\rangle = \int_{t_1}^{t_2} x(t) y(t)^* \, dt$\\
-    \( = \int_{t_1}^{t_2} x(t) y(t) dt\) if real\\
+    $\langle x(t), y(t)\rangle = \int_{t_1}^{t_2} x(t) y(t)^* \, dt = \int_{t_1}^{t_2} x(t) y(t) dt$ if real\\
     Use prod $\ra$ sum identities
-\rule{\linewidth}{0.5pt}
+\newpage
+\subsubsection*{FS}
 %\vfill\null
 %\columnbreak 
     $a_0 = \frac{1}{T_0} \int_{T_0} f(t)\, dt$\\
@@ -210,15 +237,16 @@
     $f(t) = \sum_{n=-\infty}^{\infty} F_n e^{jn\o_0 t}$\\
     $F_n = \frac{1}{T_0}\int_{T_0} f(t) e^{-jn\o_0t}\,dt$
 
-    $C_n\cos(n\o_0 t + \theta_n) = \sfrac{C_n}{2} \, (e^{j(n\o_0t + \theta_n)} + e^{-j(n\o_0 t + \theta_n)}) = (\frac{C_n} 2 e^{j\theta_n}) e^{jn\o_0 t} + (\frac{C_n} 2 e^{-j\theta_n}) e^{-jn\o_0 t}$
+    $C_n\cos(n\o_0 t + \theta_n) = \sfrac{C_n}{2} \, (e^{j(n\o_0t + \theta_n)} + e^{-j(n\o_0 t + \theta_n)})$\\
+    $ \hspace{5em}= (\frac{C_n} 2 e^{j\theta_n}) e^{jn\o_0 t} + (\frac{C_n} 2 e^{-j\theta_n}) e^{-jn\o_0 t}$
 
     $F_n = \frac{C_n}{2}\, e^{j\theta_n} = \frac 1 2 (a_n - jb_n) = |F_n| e^{j\angle F_n}$\\
     $F_{-n} = \frac{C_n}{2}\, e^{-j\theta_n} - \frac 1 2 (a_n + jb_n)$  % highlight the + and -!!, opposite
-\rule{\linewidth}{0.5pt}
+\subsubsection*{Existence}
     W: finite $\int$, fin $a$, $b$, fin power
 
     S: fin m/m/dcont over $T_0$, $\ra \frac{f(t_0^+) + f(t_0^-)}{2}$
-\rule{\linewidth}{0.5pt}
+\subsubsection*{FS prop}
     Time shift: $f(t-t_0)\lra F_n e^{-jn(\o_0 t_0)}$, $|F_n|$ same, $\angle F_n$ shifted by $-(\o_0 t_0)n$
 
     Reversal: $f(-t)\lra F_{-n}$
@@ -226,8 +254,8 @@
     Scal: $T = \sfrac {T_0} a$, $\o = a\o_0$
 
     Multip (same $T_0$): $f(t) g(t) \lra F_n * G_n$ 
-        $\frac 1{T_0}  \int_{T_0} f(t) g(t) e^{jn\o_0 t}\, dt$ =\\
-        $ \frac{1}{T_0} \int (\sum F_m e^{jm\o_0 t}) (\sum G_k e^{jk\o_0 t}) e^{-jn\o_0 t} \, dt$ \\
+        $\frac 1{T_0}  \int_{T_0} f(t) g(t) e^{jn\o_0 t}\, dt$\\
+        $ = \frac{1}{T_0} \int (\sum F_m e^{jm\o_0 t}) (\sum G_k e^{jk\o_0 t}) e^{-jn\o_0 t} \, dt$ \\
         $ = \sum_m \sum_k F_m G_k \frac{1}{T_0} \int_{T_0} e^{j(m+k-n)\o_0 t} \, dt$\\
         $ = \sum_m \sum_k F_m G_k \langle e^{j(m+k)\o_0 t}, e^{jn\o_0 t}\rangle$\\
         $ = \sum_{k=-\infty}^{\infty} G_k F_{n-k}$
@@ -245,7 +273,8 @@
 
         $f_e(t) \lra \mathrm{Re}\{ F_n\}$\\
         $f_o(t) \lra j \,\mathrm{Im} \{F_n\}$
-\rule{\linewidth}{0.5pt}
+\columnbreak
+\subsubsection*{Common FS}
     Square ($A=1$, $T=2\pi$, $\omega = 1$) 
         $\frac{4}{\pi}(\cos t - \frac{1}{3}\cos 3t + \frac{1}{5} \cos 5t- ...)$\\
         $\frac{4}{\pi}(\sin t + \frac 1 3 \sin 3t + \frac 1 5 \sin 5t + ...)$
@@ -263,9 +292,8 @@
         $\frac{1}{T_0} \sum_{n=-\infty}^{\infty} e^{jn\omega_0 t}$
 
     % square duty cycle add here
-\rule{\linewidth}{0.5pt}
-\newline
-\subsubsection{Fourier transform}
+%\section{FT}
+\subsubsection*{FT}
     Let \(F(\omega) \equiv \int f(t) e^{-j\omega t} \, dt\)
 
     \(F_n = \frac 1 {T_0} \int_{T_0} f(t) e^{-jn\omega_0 t} \, dt\)
@@ -289,7 +317,7 @@
     Existence: energy signal ($|e^{-j\o t}| = 1$)\\
     Strong: fin num max/min/discont
 
-\subsubsection{FT Table}
+\subsubsection*{FT Table}
 
     \(\delta(t) \lra 1\)\\
     $1 \lra 2\pi\delta(\omega)$
@@ -308,7 +336,7 @@
 
     \(t^n e^{-at} u(t)\ra \frac{n!}{(a+j\o)^{n+1}}\)
 
-    \(\c \o_0 t\, u(t)\ra \frac{\pi}{2}(\delta(-) + \delta(+)) + \frac{j\o}{\o_0^2-\o^2}\)\\       % write out - and +
+    \(\cos \o_0 t\, u(t)\ra \frac{\pi}{2}(\delta(-) + \delta(+)) + \frac{j\o}{\o_0^2-\o^2}\)\\       % write out - and +
     \(\sin \o_0 t\, u(t)\ra \frac{\pi}{2j}(\delta(-) - \delta(+)) + \frac{\o_0}{\o_0^2-\o^2}\)\\
     \(e^{-at}\cos \o_0t\, u(t)\ra \frac{a+j\o}{(a+j\o)^2 + \o_0^2}\)\\
     \(e^{-at}\sin \o_0t\, u(t)\ra \frac{\o_0}{(a+j\o)^2 + \o_0^2}\)           
@@ -327,7 +355,7 @@
 
     \([\frac{|\o|}{\o_0} \rect(\frac{\o}{2\o_0})] \leftarrow \frac{\cos \o_0 t + \o_0 t \sin \o_0 t - 1}{\o_0 \pi t^2}\)
    % \columnbreak
-\subsubsection{Frequency domain properties}
+\subsubsection*{Frequency domain prop}
     Linearity
 
     Time shift: \(f(t-t_0) \ra F(\omega) e^{-jt_0\omega}\) \\ % highlight negative signS
@@ -345,7 +373,9 @@
     Scaling: \(f(at)\ra \frac{1}{|a|}F(\frac{\o}{a})\)   % compress in t, expand in omega
 
     Convolution: \(f*g \ra FG\), \(fg \ra \frac{1}{2\pi} F*G\)\\
-    \(\mathcal F[f*g] = \int e^{-j\o t} \int f(\tau) g(t-\tau)d\tau dt =\int f(\tau) \mathcal F[g(t-\tau)]  d\tau = \int f(\tau) G(\o)e^{-j\o\tau}d\tau\)\\
+    \(\mathcal F[f*g] = \int e^{-j\o t} \int f(\tau) g(t-\tau)d\tau dt\)\\
+    \(\hspace{3.75em}=\int f(\tau) \mathcal F[g(t-\tau)]  d\tau \)\\
+    \(\hspace{3.75em}= \int f(\tau) G(\o)e^{-j\o\tau}d\tau\)
     % highlight above for the other direction
     \( \frac{1}{2\pi} \mathcal{F}^{-1}[F * G] = (\frac{1}{2\pi})^2 \int e^{j\o t} \int F(\lambda) G(\o - \lambda) d\lambda d\o\)
 
@@ -363,16 +393,18 @@
 
     $f$ even: \(F(\o) = 2\int_0^{\infty} f(t)\cos(\o t) dt\)\\
     $f$ odd: \(F(\o) = -2j\int_0^{\infty} f(t) \sin(\o t) dt\)
-
-\subsubsection{Parseval}
-    Psval: \(E_f = \int |f(t)|^2 dt = \frac{1}{2\pi} \int |F(\omega)|^2 d\o\)  for energy signal\\  % highlight 1/2pi, and square
+\newpage
+\subsubsection*{Parseval}
+    Psval: \(E_f = \int |f(t)|^2 dt = \frac{1}{2\pi} \int |F(\omega)|^2 d\o\)  for energy sig\\  % highlight 1/2pi, and square
     Pf: \(= \int f f^* dt = \int f(t)\mathcal F ^{-1}[F(-\o)^*]dt\)\\
     \(= \int f(t) \frac{1}{2\pi} \int F(-\o)^* e^{j\o t} d\o dt\)\\
-    \(= \frac{1}{2\pi}\int f(t) \int F(\lambda)^* e^{-jt\lambda} d\lambda dt = \int dt d\lambda\)
+    \(= \frac{1}{2\pi}\int f(t) \int F(\lambda)^* e^{-jt\lambda} d\lambda dt \)\\
+    \(= \int dt d\lambda\)
+
     \(\Delta E_f = \frac{2}{2\pi}\int^{\o_2}_{\o_1} |F(\o)|^2 d\o\) % highlight 2 due to +/-
 
     Autocorrelation \(\psi_f(t) \equiv \int f(\tau)f(\tau-t)d\tau \ra |F(\o)|^2\)   % annotate for general case w/o abs
-\subsubsection{AM}
+\subsubsection*{AM}
     \(m(t) \cos(\o_c t) \ra \frac{1}{2}[M(\o + \o_c) + M(\o - \o_c)]\)\\     % highlight M, may be a factor of pi
     \(e(t) = m(t)\cos^2 \o_c t\)  \\          % highlight ^2
     \(E(\o) = \frac{1}{2} M + \frac{1}{4}[M(\o + 2\o_c) + M(\o - 2\o_c)]\)
@@ -384,24 +416,23 @@
 
     modulation index \(\mu\equiv f_{\text{max}}/A\)\\
     $\mu = \infty$, SC, $\mu = 1$, marginal
-\subsubsection{LTIC sys trans, (m) stable}
+\subsubsection*{LTIC sys trans, (m) stable}
     % p243
     Let \(e^{j\o t} \Rightarrow H(\o) e^{j\o t}\)
 
     % left side is f(t), right side is response y(t)
-    \(\lim\sum \frac{F(n\Delta\o)\Delta\o}{2\pi} e^{jn\Delta\o t}\)\\
-    \(\Rightarrow \lim\sum \frac{F(n\Delta\o)H(n\Delta\o)\Delta\o}{2\pi} e^{jn\Delta\o t}\)\\
+    \(\lim\sum \frac{F(n\Delta\o)\Delta\o}{2\pi} e^{jn\Delta\o t}\Rightarrow \lim\sum \frac{F(n\Delta\o)H(n\Delta\o)\Delta\o}{2\pi} e^{jn\Delta\o t}\)\\
     \(y(t) = \frac{1}{2\pi}\int F(\o)H(\o)e^{j\o t} d\o\)
 
     \(Y(\o) = F(\o) H(\o)\)
 
-    Distortionless: $y(t) = kf(t-t_d)$,\\
+    Distortionless: $y(t) = kf(t-t_d)$,
     so $H(\o) = ke^{-j\o t_d}$          % highlight omega t_d, phase is equally important
 
     Payley-Wiener: $H$ realizable, $h$ causal iff \(\int\frac{|\ln|H(\omega)||}{1+\o^2} d\o < \infty\) (consecutive 0s)\\
     \(\hat{h}(t) = h(t) u(t)\)
 
-\subsubsection{Periodic FT}
+\subsubsection*{Periodic FT}
     \(f(t) = \sum_n F_n e^{jn\o_0 t}\), \(\mathcal{F}[f(t)] = 2\pi \sum_n F_n \delta(\omega - n\o_0)\)      % highlight n!
 
     \(Y = F(\omega)H(\omega) = 2\pi \sum F_n H(n\omega_0) \delta(\omega - n\omega_0) \) \\            % due to delta
@@ -415,7 +446,8 @@
 
     \(\cos 2t * e^{-3t}\, u(t) \equiv f * h\)\\       % highlight 2 in both lines
     \(=|H(2)| \cos(2t + \angle H(2))\)              % you can just directly shift on the angle of trig
-\subsubsection {Sampling}
+\columnbreak
+\subsubsection*{Sampling}
     \(\overline{f}(t)\equiv f(t) \delta_{T_s}(t) = \sum f(nT_s) \delta(t - nT_s)\)\\
     % highlight 1/T_s, don't forget this term!
     \(\overline{F}(\o) = \frac{1}{2\pi} F(\o) * [\frac{2\pi}{T_s} \sum\delta(\o - n\o_s)]\)
@@ -437,8 +469,8 @@
     Practical sampling: \(p_T(t) = \frac{\tau}{T_s} + \sum(\frac{2}{\pi n}\sin(n\pi\frac{\tau}{T_s}))\cos(n\omega_s t)\)\\
     \(P_T(\o) = 2\pi \frac{\tau}{T_s}\delta(\o)\)
     \(+ \sum\frac{2\sin(...)}{n}[\delta(\o + n\o_s) + \delta(\o - n\o_s)]\)       % highlight first term
-
-\subsubsection{LT}
+%\section{LT}
+\subsubsection*{LT}
 \(\mathcal L [-e^{-at}u(-t)] = \mathcal L [e^{-at} u(t)]\), except ROC\\
 If sig are causal, $\mathcal L$ is 1-to-1           % highlight causal
 
@@ -447,14 +479,14 @@ Unilateral: \(\mathcal{L}[f] = \ulint f(t) e^{-st} dt\)\\          % highlight 0
 
 
 $\sigma_0$: smallest $\sigma$ to make converge
-\subsubsection{Uni LT Table}
+\subsubsection*{Uni LT Table}
     Watch ROC!!     % highlight
 
-    $\delta(t) \ra 1$ ($\forall s$)\\
-    $u(t) \ra \frac{1}{s}$ ($\Re(s) > 0$)\\
+    $\delta(t) \ra 1$ \hfill $\forall s$\\
+    $u(t) \ra \frac{1}{s}$\hfill $\Re(s) > 0$\\
     $t^n u(t) \ra \frac{n!}{s^{n+1}}$               % highlight the u(t), also for e^t as well
 
-    \(e^{\lambda t} u(t) \ra \frac{1}{s-\lambda}\) ($\Re(s) > \Re(\lambda)$)\\        % highlight -
+    \(e^{\lambda t} u(t) \ra \frac{1}{s-\lambda}\) \hfill $\Re(s) > \Re(\lambda)$\\        % highlight -
     \(t^n e^{\lambda t} u(t) \ra \frac{n!}{(s-\lambda)^{n+1}}\)\\     % highlight +1
     \(\frac{1}{(n-1)!} t^{n-1} e^{\lambda t} u(t) \ra \frac{1}{(s-\lambda)^n} \)        % highlight -1, just inverse of the above
     % also highlight factorial!
@@ -466,19 +498,22 @@ $\sigma_0$: smallest $\sigma$ to make converge
     \(re^{-at} \cos(bt + \theta) u(t) \ra \frac{(r\cos\theta)s + (ar \cos\theta - br\sin \theta)}{s^2 + 2as + (a^2 + b^2)}\)\\
     % highlight 2
     \(2re^{-at} \cos(bt + \theta) u(t) \ra \frac{re^{j\theta}}{s-(-a+jb)}+\frac{re^{-j\theta}}{s-(-a-jb)}\)\\
-    \(e^{-at}\left[A\cos(b t) + \frac{B-Aa}{b}\sin(bt)\right] u(t) = \frac{\sqrt{A^2c + B^2 - 2ABa}}{b}e^{-at}\cos\left(bt + \tan^{-1}\frac{Aa-B}{Ab}\right) u(t) \ra \frac{As+B}{s^2+2as+c}\)
-\subsubsection{LT Prop}
-    Linearity (ROC $\cap$)\\
-    Time delay \(f(t-t_0) u(t-t_0) \ra F(s) e^{-st_0}\), $t_0 > 0$ (same ROC)\\    % t0 > 0 for causal
-        Pf: \(\int_{-t_0}^{\infty}\)\\ % highlight -t0, and negative signs
+    \(e^{-at}\left[A\cos(b t) + \frac{B-Aa}{b}\sin(bt)\right] u(t)\)\\
+    \(\hfill \frac{\sqrt{A^2c + B^2 - 2ABa}}{b}e^{-at}\cos\left(bt + \tan^{-1}\frac{Aa-B}{Ab}\right) u(t)\)\\
+    \(\hfill \ra \frac{As+B}{s^2+2as+c}\)
+\columnbreak
+\subsubsection*{LT Prop}
+    Linearity \hfill ROC $\cap$\\
+    Time delay \(f(t-t_0) u(t-t_0) \ra F(s) e^{-st_0}\)  \hfill same ROC\\    % t0 > 0 for causal
+        $t_0 > 0$; Pf: \(\int_{-t_0}^{\infty}\)\\ % highlight -t0, and negative signs
     % also highlight t0 in u
     Freq shift \(f(t) e^{s_0 t} \ra F(s-s_0)\) ($\Re(s) > \sigma_0 + \Re(s_0)$)\\
     Scaling ($a > 0$), \(f(at) \ra \frac{1}{|a|} F(\frac{s}{a})\) ($\Re(s) > a\sigma_0 $)\\   % highlight a
     % a > 0 for causal, may not need abs
-    Convolution \(f_1 * f_2 \ra F_1 F_2\) (ROC $\cap$)\\
+    Convolution \(f_1 * f_2 \ra F_1 F_2\) \hfill ROC $\cap$\\
     \(f_1 f_2 \ra \frac{1}{2\pi j} F_1 * F_2\)
 
-    Time diff \(\dot{f}(t) \ra sF(s) - f(0^-)\) ($\Re(s) > \max(\sigma_0, 0)$)\\     % highlight s before F and -
+    Time diff \(\dot{f}(t) \ra sF(s) - f(0^-)\) \hfill $\Re(s) > \max(\sigma_0, 0)$\\     % highlight s before F and -
         Pf (parts): \(\ulint \dot{f}(t) e^{-st} dt = \left[f(t) e^{-st} \right]^{\infty}_{0^-} + s F(s)\)\\    % highlight s again
     \(\ddot{f}(t) \ra s^2 F(s) - sf(0^-) - \dot{f}(0^-)\)   % highlight fdot, and minus signs
     % When used to LT piecewise functions, remember f(0-) = 0, f'(0-) = 0
@@ -498,9 +533,7 @@ $\sigma_0$: smallest $\sigma$ to make converge
         Pf: \(\mathcal L[\dot{f} (t)] = \ulint \dot f(t) e^{-st} dt\)\\ % highlight dot, can delete this line
         \(\lim_{s\ra 0} sF(s) - f(0^-) = \lim_{s\ra 0}\ulint \dot f (t) e^{-st} dt\)\\    % e^-st = 1
         \(sF(s) - f(0^-) = f(\infty) - f(0^-)\)    % cancel f0-
-
-
-\subsubsection{Rational $\mathcal L^{-1}$}
+\subsubsection*{Rational $\mathcal L^{-1}$}
     First make it rational      % highlight this!
 
     \(F(s) = \frac{b_ms^m + ... + b_1s + b_0}{s^n + ... + a_1s + a_0} \equiv \frac{P(s)}{Q(s)}\)
@@ -513,8 +546,8 @@ $\sigma_0$: smallest $\sigma$ to make converge
 
     Multiply both by $s$ and let $s=\infty$, only $\frac{1}{s}$ term kept 
 %\end{multicols}  
-
-\subsubsection{Sys Anal}
+\newpage
+\subsubsection*{Sys Anal}
     \(Q(D) y(t) = P(D) f(t)\)\\
     $H(s) = \frac{Y_{zs}(s)}{F(s)} = \frac{P(s)}{Q(s)}$  % highlight order, P/Q, not Q/P; highlight zs
 
@@ -523,20 +556,26 @@ $\sigma_0$: smallest $\sigma$ to make converge
     marginal: $y_{zi}(t)$ remains bounded (unrep $\lambda$ on Im axis)B
 
     BIBO iff \(\int_{-\infty}^{\infty} |h(t)| dt\) exists\\ % highlight abs
-    Pf. $\Rightarrow$. $|f(t)| < K$\\                       % highlight zs
-    \(y_{zs}(t) = h * f = \int h(\tau) f(t-\tau) d\tau \leq \int |h||f| d\tau < K \int |h(\tau)| d\tau\)\\
-    $\Leftarrow$. Let $f(t) = \sgn(h(-t))$\\                % contrapositive
-    \(y(0) = \int h(\tau) f(0-\tau) d\tau = \int h(\tau) \sgn(h(\tau)) d\tau  = \int |h(\tau)| d\tau \equiv \infty\)
+    $\Rightarrow$ $|f(t)| < K$\\                       % highlight zs
+    \(\hspace{1.25em}y_{zs}(t) = h * f= \int h(\tau) f(t-\tau) d\tau\)\\
+    \(\hspace{4em} \leq \int |h||f| d\tau < K \int |h(\tau)| d\tau\)\\
+    $\Leftarrow$ Let $f(t) = \sgn(h(-t))$\\                % contrapositive
+    \(\hspace{1.25em} y(0) = \int h(\tau) f(0-\tau) d\tau\)\\
+    \(\hspace{3.25em} = \int h(\tau) \sgn(h(\tau)) d\tau\)\\
+    \(\hspace{3.25em} = \int |h(\tau)| d\tau \equiv \infty\)
 
-    Asy $\rightarrow$ BIBO (all exp)\\                                % not the other way
-    Asy m. $\rightarrow$ BIBO u. ($\int |\sin|$)                            % cross BIBO
+    Asy $\rightarrow$ BIBO st (all exp)\\                                % not the other way
+    Marginal $\rightarrow$ BIBO ust ($\int |\sin|$)                            % cross BIBO
     % counterexample? pole and zero cancel??
 
-\subsubsection{Sys Realization}         % draw a diagraom for that
+\subsubsection*{Sys Realization}         % draw a diagraom for that
     % generally, m <= n
     % show realization of simple 1/(s+l)
     Feedback: \(Y = GE = G(F - HGY)\)\\
     \(H_{\text{eff}} = \frac{Y} F = \frac G {1+HG}\)
+
+    \includegraphics[width=0.5\linewidth]{figures/feedback.jpg}
+
 
     Canonical:\\              % diagram
     % m < n here!
@@ -584,8 +623,7 @@ $\sigma_0$: smallest $\sigma$ to make converge
     \(Y = b_2 F + \frac 1 s(-a_1 Y + b_1 F) + \frac 1 {s^2}(-a_o Y + b_0 F)\)\\
     Transpose $A$, swap $\mathbf b$, $\mathbf c$
 
-
-
+    \includegraphics[width=\linewidth]{figures/canonical.jpg}
     Cascade:\\
     Make complication in the center\\
     \(H = \frac {P_1}{s+\lambda_1} \cdot \frac{P_2}{s+\lambda_2} \cdot \frac{k_3}{s+\lambda_3}\)\\
@@ -619,6 +657,7 @@ $\sigma_0$: smallest $\sigma$ to make converge
     \end{bmatrix}
     \cdot \mathbf x
     \)
+    \includegraphics[width=\linewidth]{figures/cascade.jpg}
 
     Parallel:\\
     \(H = \frac{k_1}{s+\lambda_1} + \frac{k_2}{s+\lambda_2} + \frac{k_3}{s+\lambda_3}\)\\
@@ -652,12 +691,15 @@ $\sigma_0$: smallest $\sigma$ to make converge
     \end{bmatrix}
     \cdot \mathbf x
     \)
+    \includegraphics[width=0.75\linewidth]{figures/parallel.jpg}
+
 
     Same pole                           % diagram for that, draw s-domain first, and then fully realize
     \(H = \frac{a_0}{(s-\lambda)^2} + \frac{a_1}{s-\lambda} + \frac{k_1}{s-\alpha_1}\)      % highlight ^2
+    \includegraphics[width=0.7\linewidth]{figures/multipole.jpg}
 
-
-\subsubsection{State Equations}
+\columnbreak
+\subsubsection*{State Equations}
     Def: state at any time $t_0$: smallest set of nums $\{x_i(t_0)\}$ that is sufficient to detemrine sys behavior $\forall t > t_0$ for given input $f$\\
     Initial condition if $t_0 = 0$
 
@@ -679,7 +721,7 @@ $\sigma_0$: smallest $\sigma$ to make converge
 
 
 
-\subsubsection{Frequency Response}
+\subsubsection*{Frequency Response}
     \(H(\o) = H(s)|_{s = j\o}\) % first H is F, second is L
 
     % highlight abs
@@ -702,7 +744,7 @@ $\sigma_0$: smallest $\sigma$ to make converge
     \(y_{ss}(t) = |H(\o_0)| \cos(\o_0 t + \theta + \angle H(\o_0)) u(t)\)
     % highlight ss and u(t)
 
-\subsubsection{Filter Design}
+\subsubsection*{Filter Design}
     \(H(j\o) = b_n \frac{(j\o-z_1)..(j\o-z_n)}{(j\o-p_1)..(j\o-p_n)}\)\\\
     \(= b_n \frac{(r_1 e^{j\phi_1})...(r_n e^{j\phi_n})}{(d_1 e^{j\theta_1})... (d_n e^{j\theta_n})}\)\\
     \(|H(j\o)| = b_n \frac{r_1 ... r_n}{d_1 ... d_n}\)\\
@@ -713,4 +755,5 @@ $\sigma_0$: smallest $\sigma$ to make converge
     Vector from p/z to $j\o$
     % pole enhances gain, zero suppresses.
 \end{multicols}
+\end{landscape}
 \end{document}
