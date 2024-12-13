@@ -62,9 +62,9 @@
     $\sin(x\pm y) = \sin x \cos y \pm \cos x \sin y$\\
     $\cos(x\pm y) = \cos x \cos y \mp \sin x \sin y$
 
-    $\sin x \sin y = \sfrac{1}{2}[\cos(x-y) - \cos(x+y)]$\\ % annotate for sin 2x and cos 2x
-    $\cos x \cos y = \sfrac{1}{2}[\cos(x-y) + \cos(x+y)]$\\
-    $\sin x \cos y = \sfrac{1}{2}[\sin(x-y) + \sin(x+y)]$
+    $\sin x \sin y = \frac{1}{2}[\cos(x-y) - \cos(x+y)]$\\ % annotate for sin 2x and cos 2x
+    $\cos x \cos y = \frac{1}{2}[\cos(x-y) + \cos(x+y)]$\\
+    $\sin x \cos y = \frac{1}{2}[\sin(x-y) + \sin(x+y)]$
 
     $C \cos(\o_0 t + \theta) = C\cos(\theta) \cos(\o_0 t) - C\sin(\o_0)\sin(\o_0 t)$\\        % highlight minus in cosine
     $C \sin(\o_0 t + \theta) = C\sin(\theta) \cos(\o_0 t) + C\cos(\o_0)\sin(\o_0 t)$
@@ -99,17 +99,6 @@
     bt + b \sin bt)$
 
     \(\int \frac{1} {x^2+a^2}\, dx = \frac{1}{a} \tan^{-1} \frac x a\)
-
-    \(
-        \setlength{\jot}{0pt} % reduce the space between lines
-\begin{aligned}
-    a &= b + c \\
-    x &= y + z \\
-    p &= q + r
-\end{aligned}
-\)
-
-
 \columnbreak
 \subsubsection*{Signals}
     $\mathcal{E}_f = \int_{-\infty}^{\infty} |f(t)|^2 dt$ (complex); \\
@@ -129,8 +118,8 @@
 
     out--in  $f(2x-6)$: shift by 6, scale by 2; $f(2(x-6))$: scale by 2, shift by 6
 
-    $f_e(t) = \sfrac{1}{2}[f(t) + f(-t)]$; \\
-    $f_o(t) = \sfrac{1}{2}[f(t) - f(-t)]$
+    $f_e(t) = \frac{1}{2}[f(t) + f(-t)]$; \\
+    $f_o(t) = \frac{1}{2}[f(t) - f(-t)]$
 \subsubsection*{Systems}
     L: $\mathcal{T}[kf_1(t) + f_2(t)] = ky_1(t) + y_2(t)$.\\
     $\mathcal{T}$: $\sum_{k=0}a_k D^k \, y(t) = \sum_{l=0}b_lD^l\, f(t)$,\\
@@ -149,19 +138,20 @@
     
     Invertible: given $y(t)$, we can know $f(t)$
 \subsubsection*{Conv prop}
-    $c(t) \equiv \int_{-\infty}^{\infty} f(\tau) g(t-\tau) d\tau$
+    $c(t) \equiv \int_{-\infty}^{\infty} f(\tau) g(t-\tau) d\tau$\\
+    \(c[n] \equiv \sum_{m = -\infty}^{\infty} f[m] g[n-m]\)          % textbook p587
 
-    $f * g = g * f$
-    
-    $f * (g + h) = f * h + g * h$
-    
-    $f * (g * h) = (f * g) * h$
 
-        Pf: $f * (g * h) = f * (h * g) = \int f(\tau_1) \int h(\tau_2)\, g(t - \tau_1 - \tau_2) \, d\tau_2 \, d\tau_1$
+    $f * g = g * f$\\
+    $f * (g + h) = f * h + g * h$\\
+    $f * (g * h) = (f * g) * h$\\
+
+        pf: $f * (g * h) = f * (h * g)$\\
+        $\hspace{6.25em} = \int f(\tau_1) \int h(\tau_2)\, g(t - \tau_1 - \tau_2) \, d\tau_2 \, d\tau_1$
     
      $f(t - T_1) * g(t - T_2) = c(t - T_1 - T_2)$
 
-     $f(at) * g(at) = |\sfrac{1}{a}|\, c(at)$ (even/odd)
+     $f(at) * g(at) = |\frac{1}{a}|\, c(at)$ (even/odd)
 
      $f^{(m)} (t) * g^{(n)} (t) = c^{(m+n)}(t)$
 
@@ -181,9 +171,9 @@
     $e^{at}\, u(t) * e^{bt} \,u(-t) = \frac{e^{at} \, u(t) + e^{bt} \, u(-t)}{b-a}$
 
     % + here
-    $te^{at}\,u(t) * e^{at} \,u(t)= \sfrac{1}{2} \,t^2e^{at} \, u(t)$
+    $te^{at}\,u(t) * e^{at} \,u(t)= \frac{1}{2} \,t^2e^{at} \, u(t)$
 
-    $t^m\, u(t) * t^n \, u(t) = \frac{m!n!}{(m+n+1)!}\, t^{m+n+1} \, u(t)$
+    $t^m\, u(t) * t^n \, u(t) = \frac{m!\, n!}{(m+n+1)!}\, t^{m+n+1} \, u(t)$
 
     Don't forget $[u(t+T_1) - u(t-T_2)]$ term
 \subsubsection*{Response}
@@ -193,22 +183,25 @@
     $y_{zs}(t) = f(t) * h(t)$ from input\\    
         $y_{zs}(0^-) = 0$, $y_{zs}(0^+) \neq 0$
 
+        % textbook p120
         Let $h(t) = \mathcal{T} [\delta (t)]$ (impulse response)
         % More description here
             $y_{zs}(t)=\mathcal{T} [f(t)] = \mathcal{T} [f(t) * \delta (t)]$\\
             \hspace{2.75em}$=\mathcal{T}[\lim\sum f(n\Delta\tau) \delta(t - n\Delta\tau) \Delta\tau]$\\
             \hspace{2.75em}$=\lim\sum f(n\Delta\tau) h(t-n\Delta\tau)\Delta\tau = f * h$
+            % linearity allows sum manipulation
+            % time-invariance allows converting from \delta to h
             
         $y_{zi}(t)$ from ini, $f(t)=0$,
-            $Q y_{zi}(t) = 0$;
+            $Q y_{zi}(t) = 0$\\
             % same for the derivatives of y
             $y_{zi}(0^-) = y_{zi}(0^+)$, $\dot{y_{zi}}(0^-) = \dot{y_{zi}}(0^+)$
 %\section{FS}
 \subsubsection*{Ortho set}
     $\mathcal{E}_e = \int_{t_1}^{t_2} [e(t)]^2 dt$\\
-    $= \int_{t_1}^{t_2} f^2(t)dt - 2\sum c_i \int_{t_1}^{t_2} f(t) x_i(t) dt + \int_{t_1}^{t_2} (\sum c_i x_i(t))^2 dt$\\
-    $    = \mathcal{E}_f -  2\sum_{c_i} \langle f, x_i \rangle$\\
-    \hspace{1em}$+(\sum c_i^2 \int_{t_1}^{t_2} x_i(t)^2 dt + \sum_{i\neq j} c_i c_j \int_{t_1}^{t_2} x_i(t) x_j(t) dt)$
+    $\hspace{1.25em}= \int_{t_1}^{t_2} f^2(t)dt - 2\sum c_i \int_{t_1}^{t_2} f(t) x_i(t) dt + \int_{t_1}^{t_2} (\sum c_i x_i(t))^2 dt$\\
+    $\hspace{1.25em}   = \mathcal{E}_f -  2\sum_{c_i} \langle f, x_i \rangle$\\
+    \hspace{2.25em}$+(\sum c_i^2 \int_{t_1}^{t_2} x_i(t)^2 dt + \sum_{i\neq j} c_i c_j \int_{t_1}^{t_2} x_i(t) x_j(t) dt)$
         
     $\frac{\partial \mathcal{E}_e}{\partial c_i} = 0 = -2 \langle f(t), x_i(t)\rangle + 2\mathcal{E}_i c_i$\\
     $\mathcal{E}_e^{\text{min}} = \mathcal{E}_f - \sum_{i=1}^N c_i^2 \mathcal{E}_i$
@@ -231,13 +224,13 @@
     $b_n = \frac{2}{T_0} \int_{T_0} f(t) \sin(n\o_0t)\,dt$\\
     Energy: $T_0$ for $n=0$; $T_0/2$ else
      
-    Half-w sym: $f(t - \sfrac{T_0}{2}) = -f(t)$\\
+    Half-w sym: $f(t - \frac{T_0}{2}) = -f(t)$\\
     $a_{n_\mathrm{odd}} = \frac{4}{T_0}\int_{0}^{T_0/2} f(t) \cos (n\o_0 t) \, dt$
 
     $f(t) = \sum_{n=-\infty}^{\infty} F_n e^{jn\o_0 t}$\\
     $F_n = \frac{1}{T_0}\int_{T_0} f(t) e^{-jn\o_0t}\,dt$
 
-    $C_n\cos(n\o_0 t + \theta_n) = \sfrac{C_n}{2} \, (e^{j(n\o_0t + \theta_n)} + e^{-j(n\o_0 t + \theta_n)})$\\
+    $C_n\cos(n\o_0 t + \theta_n) = \frac{C_n}{2} \, (e^{j(n\o_0t + \theta_n)} + e^{-j(n\o_0 t + \theta_n)})$\\
     $ \hspace{5em}= (\frac{C_n} 2 e^{j\theta_n}) e^{jn\o_0 t} + (\frac{C_n} 2 e^{-j\theta_n}) e^{-jn\o_0 t}$
 
     $F_n = \frac{C_n}{2}\, e^{j\theta_n} = \frac 1 2 (a_n - jb_n) = |F_n| e^{j\angle F_n}$\\
@@ -251,7 +244,7 @@
 
     Reversal: $f(-t)\lra F_{-n}$
 
-    Scal: $T = \sfrac {T_0} a$, $\o = a\o_0$
+    Scal: $T = \frac {T_0} a$, $\o = a\o_0$
 
     Multip (same $T_0$): $f(t) g(t) \lra F_n * G_n$ 
         $\frac 1{T_0}  \int_{T_0} f(t) g(t) e^{jn\o_0 t}\, dt$\\
@@ -271,8 +264,8 @@
         $f$ real, even $\ra$ $F$ re, e; $F_{-n} = F_n = F_n^*$\\
         $f$ re, od $\ra$ $F$ im, o; $-F_{-n} = F_n = -F_n^*$
 
-        $f_e(t) \lra \mathrm{Re}\{ F_n\}$\\
-        $f_o(t) \lra j \,\mathrm{Im} \{F_n\}$
+        $f_e(t) \lra \Re\{ F_n\}$\\
+        $f_o(t) \lra j \,\Im \{F_n\}$
 \columnbreak
 \subsubsection*{Common FS}
     Square ($A=1$, $T=2\pi$, $\omega = 1$) 
@@ -364,7 +357,7 @@
     Freq shift: \(f(t) e^{j\omega_0 t} \ra F(\omega - \omega_0)\)  % watch sign, again
 
     Dual: \(f(t) \ra F(\omega)\), \(F(t) \ra 2\pi f(-\omega)\)\\ 
-    Pf. \(f(t) = \frac 1 {2\pi} \int F(\lambda) e^{jt\lambda}\, d\lambda\)\\
+    pf. \(f(t) = \frac 1 {2\pi} \int F(\lambda) e^{jt\lambda}\, d\lambda\)\\
     % highlight the -t here
     \(2\pi f(-t) = \int F(\lambda) e^{-tj\lambda}\, d\lambda = \mathcal{F}[F(\lambda)]\)
 
@@ -396,7 +389,7 @@
 \newpage
 \subsubsection*{Parseval}
     Psval: \(E_f = \int |f(t)|^2 dt = \frac{1}{2\pi} \int |F(\omega)|^2 d\o\)  for energy sig\\  % highlight 1/2pi, and square
-    Pf: \(= \int f f^* dt = \int f(t)\mathcal F ^{-1}[F(-\o)^*]dt\)\\
+    pf: \(= \int f f^* dt = \int f(t)\mathcal F ^{-1}[F(-\o)^*]dt\)\\
     \(= \int f(t) \frac{1}{2\pi} \int F(-\o)^* e^{j\o t} d\o dt\)\\
     \(= \frac{1}{2\pi}\int f(t) \int F(\lambda)^* e^{-jt\lambda} d\lambda dt \)\\
     \(= \int dt d\lambda\)
@@ -480,9 +473,8 @@ Unilateral: \(\mathcal{L}[f] = \ulint f(t) e^{-st} dt\)\\          % highlight 0
 
 $\sigma_0$: smallest $\sigma$ to make converge
 \subsubsection*{Uni LT Table}
-    Watch ROC!!     % highlight
-
-    $\delta(t) \ra 1$ \hfill $\forall s$\\
+    Watch ROC!!                                     % highlight
+    $\delta(t) \ra 1$ \hfill $\forall s$\\          % delta'(t) -> s
     $u(t) \ra \frac{1}{s}$\hfill $\Re(s) > 0$\\
     $t^n u(t) \ra \frac{n!}{s^{n+1}}$               % highlight the u(t), also for e^t as well
 
@@ -505,7 +497,7 @@ $\sigma_0$: smallest $\sigma$ to make converge
 \subsubsection*{LT Prop}
     Linearity \hfill ROC $\cap$\\
     Time delay \(f(t-t_0) u(t-t_0) \ra F(s) e^{-st_0}\)  \hfill same ROC\\    % t0 > 0 for causal
-        $t_0 > 0$; Pf: \(\int_{-t_0}^{\infty}\)\\ % highlight -t0, and negative signs
+        $t_0 > 0$; pf: \(\int_{-t_0}^{\infty}\)\\ % highlight -t0, and negative signs
     % also highlight t0 in u
     Freq shift \(f(t) e^{s_0 t} \ra F(s-s_0)\) ($\Re(s) > \sigma_0 + \Re(s_0)$)\\
     Scaling ($a > 0$), \(f(at) \ra \frac{1}{|a|} F(\frac{s}{a})\) ($\Re(s) > a\sigma_0 $)\\   % highlight a
@@ -514,23 +506,23 @@ $\sigma_0$: smallest $\sigma$ to make converge
     \(f_1 f_2 \ra \frac{1}{2\pi j} F_1 * F_2\)
 
     Time diff \(\dot{f}(t) \ra sF(s) - f(0^-)\) \hfill $\Re(s) > \max(\sigma_0, 0)$\\     % highlight s before F and -
-        Pf (parts): \(\ulint \dot{f}(t) e^{-st} dt = \left[f(t) e^{-st} \right]^{\infty}_{0^-} + s F(s)\)\\    % highlight s again
+        pf (parts): \(\ulint \dot{f}(t) e^{-st} dt = \left[f(t) e^{-st} \right]^{\infty}_{0^-} + s F(s)\)\\    % highlight s again
     \(\ddot{f}(t) \ra s^2 F(s) - sf(0^-) - \dot{f}(0^-)\)   % highlight fdot, and minus signs
     % When used to LT piecewise functions, remember f(0-) = 0, f'(0-) = 0
 
-    Time int \(\ulint f(\tau) d\tau \ra \frac{1}{s} F(s)\) Pf: diff     % highlight 0-, initial condition related
+    Time int \(\ulint f(\tau) d\tau \ra \frac{1}{s} F(s)\) pf: diff     % highlight 0-, initial condition related
 
     Freq diff \(-t f(t) \ra \frac{dF(s)}{ds}\)          % highlight negative
 
     Freq int \(\frac{1}{t}f(t) \ra \int_s^{\infty}F(z) dz\)
 
     IVT \(f(0^+) = \lim_{s\ra \infty} sF(s)\) if exists\\
-        Pf: \(\mathcal L[\dot{f} (t)] = \ulint \dot f(t) e^{-st} dt\)\\ % highlight dot
+        pf: \(\mathcal L[\dot{f} (t)] = \ulint \dot f(t) e^{-st} dt\)\\ % highlight dot
         \(sF(s) - f(0^-) = \int_{0^-}^{0^+} \dot f (t) e^{-st} dt + \int _{0^+}^{\infty} \dot f(t) e^{-st} dt \)\\    % last term goes away as s -> \inf
         \(sF(s) - f(0^-) = f(0^+) - f(0^-)\)    % cancel f0-
 
     FVT \(f(\infty) = \lim_{s\ra 0} sF(s)\) if exists\\
-        Pf: \(\mathcal L[\dot{f} (t)] = \ulint \dot f(t) e^{-st} dt\)\\ % highlight dot, can delete this line
+        pf: \(\mathcal L[\dot{f} (t)] = \ulint \dot f(t) e^{-st} dt\)\\ % highlight dot, can delete this line
         \(\lim_{s\ra 0} sF(s) - f(0^-) = \lim_{s\ra 0}\ulint \dot f (t) e^{-st} dt\)\\    % e^-st = 1
         \(sF(s) - f(0^-) = f(\infty) - f(0^-)\)    % cancel f0-
 \subsubsection*{Rational $\mathcal L^{-1}$}
@@ -577,16 +569,18 @@ $\sigma_0$: smallest $\sigma$ to make converge
     \includegraphics[width=0.5\linewidth]{figures/feedback.jpg}
 
 
-    Canonical:\\              % diagram
-    % m < n here!
-    Always make $a_n = 1$\\
-    \(F = s^2 X + a_1 sX + a_0 X\)\\
-    \(s^2 X = F - a_1 sX - a_0 X\)      % highlight minus
+    Canonical:\\
+    \(
+    \setlength{\jot}{0pt} 
+    \begin{aligned}    
+        F(s) &= 1s^3 X + a_2s^2 X + a_1 sX + a_0 X\\      % highlight 1 s^3
+        s^3 X &= F - a_2 s^2 X - a_1 sX - a_0 X         % highlight minus
+    \end{aligned}
+    \)\\
+    \(b_3 s^3 X + b_2 s^2 X + b_1 sX + b_0 X = Y(s)\)
 
-    \(b_2 s^2 X + b_1 sX + b_0 X = Y\)
-
-    % can you save a few summers for the parallel cases?
-
+    % m < n for the state-space example!
+    % here I use a first-degree denom for demonstration
     \(H = \frac{b_1s+b_0}{1s^3+a_2s^2+a_1s+a_0}\)\\     % highlight 1 s^3
 
     \(
@@ -619,14 +613,19 @@ $\sigma_0$: smallest $\sigma$ to make converge
     \end{bmatrix}
     \cdot \mathbf x
     \)\\
+
+    % textbook p793 extra material
+    % used a second degree example here to save space, sorry if it's confusing
     Second form: \(s^2 Y = s^2 b_2 F + s(-a_1 Y + b_1 F) + (-a_o Y + b_0 F)\)\\
     \(Y = b_2 F + \frac 1 s(-a_1 Y + b_1 F) + \frac 1 {s^2}(-a_o Y + b_0 F)\)\\
-    Transpose $A$, swap $\mathbf b$, $\mathbf c$
+    Transpose $\mathbf A$, swap and trans $\mathbf b$, $\mathbf c$
 
+    % note x1 x2 x3 back to front
     \includegraphics[width=\linewidth]{figures/canonical.jpg}
-    Cascade:\\
-    Make complication in the center\\
-    \(H = \frac {P_1}{s+\lambda_1} \cdot \frac{P_2}{s+\lambda_2} \cdot \frac{k_3}{s+\lambda_3}\)\\
+
+    % this is not that generalizable, compared to the other two
+    Cascade (made $P_3(s)$ constant here)\\
+    \(H = \frac {P_1(s)}{s+\lambda_1} \cdot \frac{P_2(s)}{s+\lambda_2} \cdot \frac{k_3}{s+\lambda_3}\)\\
     \(
     \begin{bmatrix}
         \dot{x}_1\\
@@ -653,7 +652,7 @@ $\sigma_0$: smallest $\sigma$ to make converge
 
     \(y =
     \begin{bmatrix}
-        .. & .. & k_3       % always x x 1
+        0 & 0 & k_3       % always x x 1
     \end{bmatrix}
     \cdot \mathbf x
     \)
@@ -700,40 +699,47 @@ $\sigma_0$: smallest $\sigma$ to make converge
 
 \columnbreak
 \subsubsection*{State Equations}
-    Def: state at any time $t_0$: smallest set of nums $\{x_i(t_0)\}$ that is sufficient to detemrine sys behavior $\forall t > t_0$ for given input $f$\\
-    Initial condition if $t_0 = 0$
+    Def: \textit{state} of a sys at any time $t_0$ is the \textit{smallest} set of nums $\{x_i(t_0)\}$
+        that is sufficient to detemrine sys behavior $\forall t > t_0$ 
+        when input $f(t)$ is known for $t > t_0$\\
+    Always \fbox{$\int$} output\\
+    If $t_0 = 0$, initial condition
 
-    Always int. output
 
-    \(\mathbf{\dot x} = A \mathbf x + \mathbf b f\)\\
-    \(y = \mathbf{c} \cdot \mathbf x\)
-
-    Multiple i/o:
-    \(\mathbf{\dot x} = A \mathbf x + \mathbf B \mathbf f\)\\
+    \(\mathbf{\dot x} = \mathbf A \mathbf x + \mathbf b f\)\\
+    \(y = \mathbf{c} \cdot \mathbf x\)\\
+    Multiple i/o:\\
+    \(\mathbf{\dot x} = \mathbf A \mathbf x + \mathbf B \mathbf f\)\\
     \(\mathbf y = \mathbf C \mathbf x + \mathbf D \mathbf f\)
 
-    \(s \mathbf X(s) - \mathbf x(0) = A \mathbf X(s) + \mathbf B \mathbf F(s)\)\\
-    \((s \mathbf I - \mathbf A) \mathbf X(s) = \mathbf x(0) + \mathbf B \mathbf F(s)\)\\
-    \(\mathbf X(s) = (s \mathbf I - \mathbf A)^{-1} \mathbf x(0) + (s \mathbf I - \mathbf A)^{-1} \mathbf B \mathbf F(s)\)\\
-    % zero input and zero state
-    substitute $\mathbf X$ for $\mathbf Y_{zi}$ and $\mathbf Y_{zs}$
-    
-
-
-
-\subsubsection*{Frequency Response}
-    \(H(\o) = H(s)|_{s = j\o}\) % first H is F, second is L
+    \(
+        \setlength{\jot}{0pt} % reduce the space between lines
+        \begin{aligned}
+            s \mathbf X(s) - \mathbf x(0) &= \mathbf A \mathbf X(s) + \mathbf B \mathbf F(s) \\
+            (s \mathbf I - \mathbf A) \mathbf X(s) &= \mathbf x(0) + \mathbf B \mathbf F(s) \\
+            \mathbf X(s) &= (s \mathbf I - \mathbf A)^{-1} \mathbf x(0) + (s \mathbf I - \mathbf A)^{-1} \mathbf B \mathbf F(s)\\
+            \mathbf x(t) &= \mathbf x_{zi}(t) + \mathbf x_{zs}(t)
+        \end{aligned}
+    \)
+\subsubsection*{LTI Freq Response}
+    \(H(\o) = H(s)|_{s = j\o} = \frac{P(s)}{Q(s)}\)     % first H is F, second is L
 
     % highlight abs
-    Ideal delay: \(|H| = 1, \angle(\o) = -\o T\)\\      % comes from exp(j..)
-    Ideal diff: \(|H(\o)| = |\o|, \angle H = \pm\frac {\pi} 2\)\\
-    Ideal int: \(|H(\o)| = \frac 1 {|\o|}\), \(\angle H = \mp \frac{\pi} 2\)
+    Ideal delay: \(|H| = 1, \angle H(\o) = -\o T\)\\      % comes from exp(j..)
+    Ideal diff: \(|H(\o)| = |\o|, \angle H(\o) = \pm\frac {\pi} 2\)\\
+    Ideal int: \(|H(\o)| = \frac 1 {|\o|}\), \(\angle H(\o) = \mp \frac{\pi} 2\)
     % symmetry for -omega
 
-    \(f(t) = e^{j\o_0 t}\, u(t)\) thru \(H(s) = \frac{P(s)}{Q(s)}\)\\   % highlight j and u(t)
+    \(f(t) = C = Ce^{0t}\)\\
+    \(y(t) = H(0) C\)
+
+    \(f(t) = e^{st}\) \hfill everlasting\\
+    \(y(t) = h(t) * e^{st} = e^{st} \int h(\tau) e^{-s\tau} d\tau \equiv H(s) e^{st}\)
+
+    \(f(t) = e^{j\o_0 t}\, u(t)\)\\   % highlight j and u(t)
     \(Y_{zs}(s) = F(s) H(s)\)\\      % highlight zs!!
-    \(= \frac 1 {s - j\o_0} \frac{P(s)}{(s-\lambda_1)...(s-\lambda_n)}\)\\
-    \(= \frac{H(s)|_{s=j\o_0}}{s-j\o_0} + \frac{k_1}{s-\lambda_1} ...\)\\
+    \(\hspace{3em}= \frac 1 {s - j\o_0} \frac{P(s)}{(s-\lambda_1)...(s-\lambda_n)}\)\\
+    \(\hspace{3em}= \frac{H(s)|_{s=j\o_0}}{s-j\o_0} + \frac{k_1}{s-\lambda_1} + ...\)\\
     \(y_{zs}(t) = H(\o_0)  e^{j\o_0 t} \, u(t) + \sum_i k_i e^{\lambda_i t} \, u(t)\)
     % highlight u(t) on the last step, and zero state "zs"
 
@@ -741,19 +747,19 @@ $\sigma_0$: smallest $\sigma$ to make converge
     $y_{tr}(t)$ decays for stable sys
 
     \(f(t) = \cos(\o_0 t + \theta) \, u(t)\)\\
-    \(y_{ss}(t) = |H(\o_0)| \cos(\o_0 t + \theta + \angle H(\o_0)) u(t)\)
+    \(y_{ss}(t) = |H(\o_0)| \cos(\o_0 t + \theta + \angle H(\o_0)) \, u(t)\)
     % highlight ss and u(t)
 
-\subsubsection*{Filter Design}
+\subsubsection*{Pole Zero}
     \(H(j\o) = b_n \frac{(j\o-z_1)..(j\o-z_n)}{(j\o-p_1)..(j\o-p_n)}\)\\\
-    \(= b_n \frac{(r_1 e^{j\phi_1})...(r_n e^{j\phi_n})}{(d_1 e^{j\theta_1})... (d_n e^{j\theta_n})}\)\\
-    \(|H(j\o)| = b_n \frac{r_1 ... r_n}{d_1 ... d_n}\)\\
-    \(\angle H(j\o) = (\phi_1 + .. + \phi_n) - (\theta_1 + .. + \theta_n)\)\\
+    \(\hspace{2.75em} \equiv b_n \frac{(r_1 e^{j\phi_1})...(r_n e^{j\phi_n})}{(d_1 e^{j\theta_1})... (d_n e^{j\theta_n})}\)\\
+    \(|H(\o)| = b_n \frac{r_1 ... r_n}{d_1 ... d_n}\)\\
+    \(\angle H(\o) = (\phi_1 + .. + \phi_n) - (\theta_1 + .. + \theta_n)\)          % symmetry here!
     % give a graphical example
     % example of z = -1, p = -2 may be useful
 
-    Vector from p/z to $j\o$
-    % pole enhances gain, zero suppresses.
+    Vector from p/z to $j\o$\\
+    Pole enhances gain; Zero suppresses
 \end{multicols}
 \end{landscape}
 \end{document}
